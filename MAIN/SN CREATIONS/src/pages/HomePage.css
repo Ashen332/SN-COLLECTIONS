@@ -1,3 +1,9 @@
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
@@ -14,12 +20,13 @@ body {
 
 .hero {
   position: relative;
-  width: 100%;
-  height: 100vh; /* FULL SCREEN */
-  background-image: url("https://images.unsplash.com/photo-1512436991641-6745cdb1723f");
+  width: 100vw;  /* full viewport width */
+  height: 100vh;  /* full viewport height */
+  min-height: 100vh;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  transition: background-image 1s ease-in-out;
 }
 
 .overlay {
@@ -28,7 +35,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.5); /* dark overlay */
 }
 
 .hero-content {

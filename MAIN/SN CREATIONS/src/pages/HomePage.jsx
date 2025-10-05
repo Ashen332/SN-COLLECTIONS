@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./HomePage.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import img1 from "../assets/1.png";
+import img2 from "../assets/2.png";
+import img3 from "../assets/3.png";
+
+const images = [img1, img2, img3];
 
 const HomePage = () => {
+  const [currentImage, setCurrentImage] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % images.length);
+    }, 5000); // change image every 5 seconds
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="homepage">
       {/* Navbar */}
@@ -18,10 +32,7 @@ const HomePage = () => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div
-          className="collapse navbar-collapse justify-content-end"
-          id="navbarNav"
-        >
+        <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item mx-3">
               <a className="nav-link text-black-50" href="#">
@@ -43,7 +54,10 @@ const HomePage = () => {
       </nav>
 
       {/* Fullscreen Hero */}
-      <section className="hero d-flex align-items-center justify-content-center text-center text-white">
+      <section
+        className="hero d-flex align-items-center justify-content-center text-center text-white"
+        style={{ backgroundImage: `url(${images[currentImage]})` }}
+      >
         <div className="overlay"></div>
         <div className="hero-content">
           <h1 className="display-2 fw-bold">SN COLLECTIONS</h1>
