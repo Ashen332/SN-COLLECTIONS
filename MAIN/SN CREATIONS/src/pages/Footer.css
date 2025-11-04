@@ -1,142 +1,162 @@
-.footer {
-  background-color: #111;
-  color: #f5f5f5;
+/* ================================
+   SN COLLECTIONS — LUXURY FOOTER
+   ================================ */
+.sn-footer {
+  background: #0b0b0b;
+  color: #f9f9f9;
   font-family: "Poppins", sans-serif;
-  padding-top: 80px; /* ⬆️ increased from 60px for more space */
-  padding-bottom: 40px; /* ⬆️ slightly more breathing room */
-}
-.footer a {
-  color: #f5f5f5;
-  text-decoration: none;
-  transition: color 0.3s ease;
+  padding: 100px 0 60px;
+  position: relative;
+  overflow: hidden;
 }
 
-.footer a:hover {
-  color: #ffce00; /* subtle accent color */
-}
-
-.footer-top {
+/* Container */
+.sn-footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
   flex-wrap: wrap;
-  gap: 40px;
+  gap: 80px;
 }
 
-.footer-brand {
-  flex: 1;
-  min-width: 250px;
+/* Brand Section */
+.sn-footer-brand {
+  flex: 1 1 300px;
+  max-width: 350px;
 }
 
-.brand-title {
-  font-size: 1.8rem;
+.sn-footer-logo {
+  font-size: 2rem;
   font-weight: 700;
-  letter-spacing: 2px;
-  margin-bottom: 15px;
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+  color: #fff;
 }
 
-.brand-text {
+.sn-footer-brand p {
+  color: #cfcfcf;
   font-size: 0.95rem;
   line-height: 1.6;
-  color: #ccc;
-  max-width: 300px;
 }
 
-.footer-links {
+/* Links */
+.sn-footer-links {
   display: flex;
-  gap: 50px;
-  flex: 1;
-  min-width: 250px;
+  gap: 80px;
+  flex-wrap: wrap;
+  flex: 2 1 400px;
 }
 
-.footer-links h6 {
-  font-weight: 600;
-  margin-bottom: 15px;
+.sn-footer-links h6 {
   text-transform: uppercase;
   font-size: 0.9rem;
-  color: #fff;
+  margin-bottom: 15px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
 }
 
-.footer-links ul {
+.sn-footer-links ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
-.footer-links li {
+.sn-footer-links li {
   margin-bottom: 8px;
-  font-size: 0.88rem;
 }
 
-.footer-social {
-  flex: 1;
-  min-width: 200px;
+.sn-footer-links a {
+  color: #cfcfcf;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
 }
 
-.footer-social h6 {
-  font-weight: 600;
-  margin-bottom: 15px;
+.sn-footer-links a:hover {
+  color: #fff;
+  letter-spacing: 0.3px;
+}
+
+/* Social */
+.sn-footer-social {
+  flex: 1 1 150px;
+  text-align: left;
+}
+
+.sn-footer-social h6 {
   text-transform: uppercase;
   font-size: 0.9rem;
-  color: #fff;
+  margin-bottom: 15px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
 }
 
 .social-icons a {
-  font-size: 1.2rem;
+  color: #cfcfcf;
+  font-size: 1.3rem;
   margin-right: 15px;
-  display: inline-block;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .social-icons a:hover {
-  color: #ffce00;
+  color: #fff;
+  transform: translateY(-2px);
 }
 
-.footer-bottom {
-  border-top: 1px solid #222;
+/* Bottom */
+.sn-footer-bottom {
   text-align: center;
-  margin-top: 40px;
-  padding-top: 20px;
-  font-size: 0.85rem;
+  margin-top: 70px;
+  padding-top: 25px;
+  border-top: 1px solid #1c1c1c;
   color: #aaa;
+  font-size: 0.85rem;
+  letter-spacing: 0.4px;
 }
 
-/* Responsive */
+/* Responsive Layout */
+@media (max-width: 992px) {
+  .sn-footer-container {
+    gap: 60px;
+  }
+}
+
 @media (max-width: 768px) {
-  .footer-top {
+  .sn-footer-container {
     flex-direction: column;
-    gap: 30px;
+    text-align: center;
+    gap: 50px;
   }
 
-  .footer-links {
-    flex-direction: column;
-    gap: 20px;
+  .sn-footer-brand {
+    max-width: 100%;
   }
 
-  .footer-social {
-    text-align: left;
+  .sn-footer-links {
+    justify-content: center;
+    gap: 50px;
+  }
+
+  .sn-footer-social {
+    text-align: center;
+  }
+
+  .social-icons a {
+    margin: 0 10px;
   }
 }
 
-/* ===== Layout Fix (removes dark section above footer) ===== */
-body {
-  margin: 0;
-  background-color: #fff; /* or your preferred background color */
+@media (max-width: 480px) {
+  .sn-footer {
+    padding: 70px 0 40px;
+  }
+  .sn-footer-logo {
+    font-size: 1.7rem;
+  }
+  .sn-footer-bottom {
+    font-size: 0.8rem;
+  }
 }
-
-#root {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.app-container {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  background-color: #fff; /* ensures no dark band appears */
-}
-
-main {
-  flex: 1;
-}
-
-

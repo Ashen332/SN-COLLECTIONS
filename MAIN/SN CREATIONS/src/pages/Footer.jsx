@@ -4,18 +4,19 @@ import "./Footer.css";
 
 const Footer = () => {
   return (
-    <footer className="footer">
-      <div className="footer-top container">
+    <footer className="sn-footer">
+      <div className="sn-footer-container">
         {/* Brand */}
-        <div className="footer-brand">
-          <h2 className="brand-title">SN Collections</h2>
-          <p className="brand-text">
-            Timeless elegance crafted for every occasion. Discover the collection that defines style.
+        <div className="sn-footer-brand">
+          <h2 className="sn-footer-logo">SN COLLECTIONS</h2>
+          <p>
+            Timeless elegance crafted for every occasion.<br />
+            Discover the collection that defines style.
           </p>
         </div>
 
-        {/* Navigation Links */}
-        <div className="footer-links">
+        {/* Links */}
+        <div className="sn-footer-links">
           <div>
             <h6>Shop</h6>
             <ul>
@@ -35,8 +36,8 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Social Icons */}
-        <div className="footer-social">
+        {/* Social */}
+        <div className="sn-footer-social">
           <h6>Follow Us</h6>
           <div className="social-icons">
             <a href="#" aria-label="Instagram"><i className="bi bi-instagram"></i></a>
@@ -46,8 +47,9 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="footer-bottom">
-        <p>© {new Date().getFullYear()} SN Collections. All rights reserved.</p>
+      {/* Bottom line */}
+      <div className="sn-footer-bottom">
+        <p>© {new Date().getFullYear()} SN Collections — All Rights Reserved.</p>
       </div>
     </footer>
   );

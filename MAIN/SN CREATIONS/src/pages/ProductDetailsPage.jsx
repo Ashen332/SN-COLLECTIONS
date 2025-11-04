@@ -15,7 +15,6 @@ const ProductDetailsPage = () => {
   const [error, setError] = useState("");
   const modalRef = useRef(null);
 
-  // ✅ Preload product images (smooth transitions)
   useEffect(() => {
     if (product?.images) {
       product.images.forEach((src) => {
@@ -25,7 +24,6 @@ const ProductDetailsPage = () => {
     }
   }, [product]);
 
-  // ✅ Recalculate total
   useEffect(() => {
     if (product) {
       const numericPrice = parseFloat(
@@ -44,7 +42,6 @@ const ProductDetailsPage = () => {
     );
   }
 
-  // ✅ Add to cart
   const handleAddToCart = () => {
     if (!selectedSize) {
       setError("Please select a size before adding to cart.");
@@ -75,7 +72,6 @@ const ProductDetailsPage = () => {
     cart.push(newItem);
     localStorage.setItem("cart", JSON.stringify(cart));
 
-    // ✅ Proper modal handling
     const modalElement = modalRef.current;
     if (modalElement) {
       const modalInstance =
@@ -84,27 +80,39 @@ const ProductDetailsPage = () => {
     }
   };
 
-  // ✅ Smooth modal close
   const closeModal = () => {
     const modalInstance = window.bootstrap.Modal.getInstance(modalRef.current);
     if (modalInstance) modalInstance.hide();
   };
 
+  // ✅ Dress and Crop Top Data
+  const dressSizes = [
+    ["XS", 13.5, 30, 26, 34, 35.5, 53],
+    ["S", 14, 32, 28, 36, 35.5, 53],
+    ["M", 14.5, 34, 30, 38, 36, 54],
+    ["L", 15, 36, 32, 40, 36, 54],
+    ["XL", 15.5, 38, 34, 42, 36.5, 55],
+    ["2XL", 16, 40, 36, 44, 36.5, 55],
+  ];
+
+  const cropSizes = [
+    ["XS", 13.5, 30, 26, 13.5],
+    ["S", 14, 32, 28, 13.5],
+    ["M", 14.5, 34, 30, 14],
+    ["L", 15, 36, 32, 14],
+    ["XL", 15.5, 38, 34, 14.5],
+    ["2XL", 16, 40, 36, 14.5],
+  ];
+
+  const isCropTop =
+    product.category?.toLowerCase().includes("crop") ||
+    product.name?.toLowerCase().includes("crop");
+
   return (
-    <div
-      className="product-details-wrapper"
-      style={{
-        backgroundColor: "#fff",
-        position: "relative",
-        zIndex: 1,
-        margin: 0,
-        padding: "60px 0 40px 0",
-        minHeight: "calc(100vh - 200px)",
-      }}
-    >
+    <div className="product-details-wrapper bg-white">
       <div className="container product-details-container">
         <div className="row align-items-start">
-          {/* Left — Image Gallery */}
+          {/* Left — Images */}
           <div className="col-md-6 text-center">
             <img
               src={mainImage}
@@ -171,6 +179,16 @@ const ProductDetailsPage = () => {
                   </button>
                 ))}
               </div>
+
+              <p
+                className="mt-3 text-decoration-underline text-dark fw-semibold"
+                style={{ cursor: "pointer" }}
+                data-bs-toggle="modal"
+                data-bs-target="#sizeChartModal"
+              >
+                (Size Chart)
+              </p>
+
               {error && (
                 <div
                   className="text-danger mt-2 fw-medium"
@@ -184,14 +202,14 @@ const ProductDetailsPage = () => {
             {/* Quantity */}
             <div className="quantity mt-4 d-flex align-items-center gap-3">
               <button
-                className="btn btn-outline-dark rounded-circle quantity-btn"
+                className="btn btn-outline-dark rounded-circle"
                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
               >
                 −
               </button>
               <span className="fs-5 fw-semibold">{quantity}</span>
               <button
-                className="btn btn-outline-dark rounded-circle quantity-btn"
+                className="btn btn-outline-dark rounded-circle"
                 onClick={() => setQuantity(quantity + 1)}
               >
                 +
@@ -200,7 +218,7 @@ const ProductDetailsPage = () => {
 
             {/* Add to Cart */}
             <button
-              className="btn btn-dark w-100 mt-4 py-3 add-to-cart-btn"
+              className="btn btn-dark w-100 mt-4 py-3"
               onClick={handleAddToCart}
             >
               🛒 ADD TO CART
@@ -209,79 +227,102 @@ const ProductDetailsPage = () => {
         </div>
       </div>
 
-      {/* ✅ Modern Bootstrap Modal */}
+      {/* ✅ Size Chart Modal */}
       <div
         className="modal fade"
-        id="cartModal"
+        id="sizeChartModal"
         tabIndex="-1"
-        ref={modalRef}
         aria-hidden="true"
       >
         <div className="modal-dialog modal-lg modal-dialog-centered">
-          <div className="modal-content cart-modal-content">
-            <div className="modal-header border-0 pb-0">
+          <div className="modal-content border-0 rounded-4 shadow-lg">
+            <div className="modal-header border-0">
               <h5 className="modal-title fw-bold text-uppercase">
-                Item Added to Your Cart
+                Size Guide
               </h5>
               <button
                 type="button"
                 className="btn-close"
-                onClick={closeModal}
+                data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
 
             <div className="modal-body">
-              <div className="row align-items-center">
-                <div className="col-md-6 text-center border-end">
-                  <div className="check-circle mx-auto mb-3">
-                    <span>✔</span>
-                  </div>
-                  <h6 className="fw-semibold mb-1">{product.name}</h6>
-                  <p className="text-muted mb-1">LKR {product.price}</p>
-                  <small className="text-secondary d-block mb-2">
-                    Variant: {selectedSize} / {product.colors}
-                    <br />
-                    Qty: x{quantity}
-                  </small>
-                  <img
-                    src={product.images[0]}
-                    alt={product.name}
-                    className="img-fluid rounded shadow-sm my-3"
-                    style={{ maxHeight: "230px", objectFit: "cover" }}
-                  />
-                </div>
-
-                <div className="col-md-6 text-center py-4">
-                  <h5 className="fw-bold text-uppercase mb-3">Cart Summary</h5>
-                  <p className="fs-5 fw-bold text-dark mb-4">
-                    Total: LKR {total.toLocaleString()}
-                  </p>
-                  <div className="d-flex flex-column gap-3 align-items-center">
-                    <button
-                      className="btn btn-outline-dark w-75 rounded-pill"
-                      onClick={closeModal}
-                    >
-                      ← Continue Shopping
-                    </button>
-                    <button
-                      className="btn btn-dark w-75 rounded-pill proceed-btn"
-                      onClick={() => {
-                        closeModal();
-                        navigate("/checkout");
-                      }}
-                    >
-                      Proceed to Checkout →
-                    </button>
-                  </div>
-                </div>
+              <div className="size-guide-intro mb-4">
+                <p className="text-muted small">
+                  We design our garments to align with the measurements listed
+                  below. Use this guide to find your best fit based on{" "}
+                  <strong>
+                    Shoulder, Bust, Waist, Hip, Knee Length, and Anchor Length.
+                  </strong>{" "}
+                  Actual fit may vary slightly depending on the fabric and
+                  design style.
+                </p>
+                <ul className="text-muted small ps-3">
+                  <li>
+                    <strong>SHOULDER:</strong> Measure straight across from one
+                    shoulder tip to the other.
+                  </li>
+                  <li>
+                    <strong>BUST:</strong> Measure around the fullest part of
+                    your chest, keeping the tape parallel to the floor.
+                  </li>
+                  <li>
+                    <strong>WAIST:</strong> Measure around the narrowest part of
+                    your waistline.
+                  </li>
+                  <li>
+                    <strong>HIP:</strong> Measure around the widest part of your
+                    hips, about 8 inches below your waist.
+                  </li>
+                  <li>
+                    <strong>KNEE LENGTH:</strong> Measure vertically from the
+                    waist to the middle of the knee.
+                  </li>
+                  <li>
+                    <strong>ANCHOR LENGTH:</strong> Measure vertically from the
+                    shoulder down to the garment’s full length.
+                  </li>
+                </ul>
               </div>
-            </div>
 
-            <div className="modal-footer border-0 text-center py-3 bg-light">
-              <p className="text-muted small w-100 mb-0">
-                You can close this popup manually anytime.
-              </p>
+              <div className="table-responsive">
+                <table className="table table-striped align-middle text-center">
+                  <thead className="table-dark">
+                    <tr>
+                      {isCropTop ? (
+                        <>
+                          <th>Size</th>
+                          <th>Shoulder (in)</th>
+                          <th>Bust (in)</th>
+                          <th>Waist (in)</th>
+                          <th>Top Length (in)</th>
+                        </>
+                      ) : (
+                        <>
+                          <th>Size</th>
+                          <th>Shoulder (in)</th>
+                          <th>Bust (in)</th>
+                          <th>Waist (in)</th>
+                          <th>Hip (in)</th>
+                          <th>Knee Length (in)</th>
+                          <th>Anchor Length (in)</th>
+                        </>
+                      )}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {(isCropTop ? cropSizes : dressSizes).map((row, index) => (
+                      <tr key={index}>
+                        {row.map((cell, i) => (
+                          <td key={i}>{cell}</td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>

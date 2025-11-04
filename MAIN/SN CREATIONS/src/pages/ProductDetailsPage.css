@@ -718,3 +718,122 @@ html {
     margin: 0 auto 1rem;
   }
 }
+/* Professional Size Chart Modal */
+/* =============== SIZE GUIDE MODAL =============== */
+/* ===============================
+   SIZE CHART MODAL – RESPONSIVE FIX
+   =============================== */
+
+/* General modal container */
+#sizeChartModal .modal-dialog {
+  max-width: 900px;
+  width: 95%;
+  margin: 1.5rem auto;
+}
+
+/* Content box */
+#sizeChartModal .modal-content {
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+/* Header */
+#sizeChartModal .modal-header {
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #eee;
+  padding: 1.25rem 1.75rem;
+}
+
+#sizeChartModal .modal-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #111;
+}
+
+#sizeChartModal .btn-close {
+  filter: invert(0.6);
+  opacity: 0.8;
+}
+
+/* Body content */
+#sizeChartModal .modal-body {
+  padding: 1.75rem;
+  max-height: 75vh;
+  overflow-y: auto;
+}
+
+#sizeChartModal .size-guide-intro p,
+#sizeChartModal .size-guide-intro li {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #444;
+}
+
+#sizeChartModal .table {
+  margin-bottom: 0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Table header */
+#sizeChartModal thead th {
+  background-color: #111 !important;
+  color: #fff !important;
+  font-weight: 600;
+  white-space: nowrap;
+  font-size: 0.95rem;
+}
+
+/* Table body */
+#sizeChartModal tbody td {
+  font-size: 0.93rem;
+  padding: 0.75rem;
+}
+
+/* Scrollbar for long content (mobile) */
+#sizeChartModal .modal-body::-webkit-scrollbar {
+  width: 6px;
+}
+#sizeChartModal .modal-body::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  #sizeChartModal .modal-body {
+    padding: 1.25rem;
+  }
+
+  #sizeChartModal .table th,
+  #sizeChartModal .table td {
+    font-size: 0.85rem;
+    padding: 0.6rem;
+  }
+
+  #sizeChartModal .modal-dialog {
+    width: 96%;
+    margin: 1rem auto;
+  }
+
+  #sizeChartModal .modal-title {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  #sizeChartModal .modal-body {
+    max-height: 70vh;
+    overflow-y: scroll;
+  }
+
+  #sizeChartModal .table th,
+  #sizeChartModal .table td {
+    font-size: 0.8rem;
+    padding: 0.45rem;
+  }
+}
