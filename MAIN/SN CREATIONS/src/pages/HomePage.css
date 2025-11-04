@@ -111,3 +111,24 @@ body {
   transform: scale(1.08);
   transition: transform 1.2s ease;
 }
+/* ===== Footer ===== */
+.footer-link {
+  color: #bbb;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #fff;
+}
+
+.social-icon {
+  color: #bbb;
+  font-size: 1.4rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icon:hover {
+  color: #fff;
+  transform: translateY(-3px);
+}

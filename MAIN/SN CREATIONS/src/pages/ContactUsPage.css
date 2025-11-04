@@ -1,70 +1,221 @@
-.contact-page {
-  background-color: #f9f9f9;
-  min-height: 100vh;
+/* ================================================
+   GLOBAL STYLES — SN Collection
+   Elegant black/white theme with gold accents
+   ================================================ */
+
+:root {
+  --brand-black: #000;
+  --brand-white: #fff;
+  --brand-gray: #f8f8f8;
+  --brand-gold: #ffce00;
+  --text-dark: #111;
+  --text-muted: #777;
+  --transition: all 0.3s ease;
+  --radius-lg: 20px;
+  --radius-md: 12px;
+}
+
+body {
   font-family: "Poppins", sans-serif;
+  background-color: var(--brand-white);
+  color: var(--text-dark);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  scroll-behavior: smooth;
 }
 
-.contact-card {
-  background: #fff;
-  max-width: 950px;
-  width: 100%;
-  border: 1px solid #eee;
-  transition: all 0.3s ease;
+#root {
+  flex: 1;
 }
 
-.contact-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+/* ================================================
+   UNIVERSAL ELEMENTS
+   ================================================ */
+
+.card {
+  border: none !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  transition: var(--transition);
+  background-color: var(--brand-white);
 }
 
-.contact-info {
-  background: linear-gradient(145deg, #000, #222);
-}
-
-.contact-info h3 {
-  letter-spacing: 1px;
-}
-
-.info-item small {
-  color: #bbb;
-}
-
-.form-label {
-  color: #333;
+.card:hover {
+  transform: translateY(-3px);
 }
 
 .form-control {
-  border: 1px solid #ccc;
-  padding: 10px 14px;
-  font-size: 0.95rem;
-  transition: all 0.3s ease;
+  border: 1px solid #ddd;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  transition: var(--transition);
 }
 
 .form-control:focus {
-  border-color: #000;
-  box-shadow: none;
+  border-color: var(--brand-black);
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
 }
 
 .btn-dark {
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  background-color: var(--brand-black) !important;
+  color: var(--brand-white) !important;
+  border-radius: 50px !important;
+  letter-spacing: 0.3px;
+  font-weight: 500;
+  padding: 10px 28px;
+  border: none;
+  transition: var(--transition);
 }
 
 .btn-dark:hover {
-  background-color: #333;
-  transform: scale(1.05);
+  background-color: #222 !important;
+  transform: translateY(-1px);
 }
 
-/* Mobile adjustments */
+.btn-outline-dark {
+  border-radius: 50px !important;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  transition: var(--transition);
+}
+
+.btn-outline-dark:hover {
+  background-color: var(--brand-black);
+  color: var(--brand-white);
+}
+
+/* ================================================
+   CONTACT PAGE
+   ================================================ */
+
+.contact-page {
+  background-color: var(--brand-gray);
+  min-height: 100vh;
+  padding: 100px 0;
+}
+
+.contact-card {
+  background-color: var(--brand-white);
+  max-width: 1000px;
+  width: 95%;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  transition: var(--transition);
+}
+
+.contact-card:hover {
+  transform: translateY(-4px);
+}
+
+.contact-info {
+  background-color: var(--brand-black);
+  color: var(--brand-white);
+  border-radius: var(--radius-lg);
+}
+
+.social-links a {
+  color: var(--brand-white);
+  background-color: #222;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.social-links a:hover {
+  background-color: var(--brand-white);
+  color: var(--brand-black);
+}
+
+/* ================================================
+   CHECKOUT PAGE
+   ================================================ */
+
+.checkout-wrapper {
+  background-color: var(--brand-gray);
+  padding: 100px 0;
+}
+
+.cdm-details {
+  background: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: var(--radius-md);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: var(--transition);
+}
+
+.cdm-details:hover {
+  transform: translateY(-2px);
+}
+
+.cdm-details ul {
+  padding-left: 1rem;
+}
+
+.cdm-details li {
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  margin-bottom: 5px;
+}
+
+.cdm-details strong {
+  color: var(--brand-black);
+}
+
+.cdm-details input[type="file"] {
+  border-radius: var(--radius-md);
+  background: var(--brand-white);
+}
+
+/* ================================================
+   FOOTER
+   ================================================ */
+
+.footer {
+  background-color: var(--brand-black);
+  color: var(--brand-white);
+  padding-top: 60px;
+  padding-bottom: 20px;
+  margin-top: 0;
+  border-top: 1px solid #222;
+}
+
+.footer a {
+  color: var(--brand-white);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.footer a:hover {
+  color: var(--brand-gold);
+}
+
+.footer-bottom {
+  border-top: 1px solid #222;
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 20px;
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
+/* ================================================
+   RESPONSIVE DESIGN
+   ================================================ */
+
 @media (max-width: 768px) {
-  .contact-info {
-    text-align: center;
+  .contact-card,
+  .card {
+    padding: 1.5rem !important;
   }
 
-  .info-item {
-    justify-content: center;
-  }
-
-  .contact-card {
-    padding: 2rem 1.5rem;
+  .footer {
+    text-align: left;
+    padding-top: 40px;
   }
 }

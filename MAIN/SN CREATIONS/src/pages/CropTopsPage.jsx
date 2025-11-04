@@ -1,6 +1,7 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import "./AllTopsPage.css"; // reuse same CSS styling
 
 // ✅ Import images
 import DSC00047 from "../assets/DSC00047.jpg";
@@ -17,33 +18,51 @@ import DSC09997 from "../assets/DSC09997.jpg";
 import DSC09998 from "../assets/DSC09998.jpg";
 
 const CropTopsPage = () => {
+  const navigate = useNavigate();
+
   const cropTops = [
     {
       name: "One Shoulder Crop Top",
+      price: "3,790",
       images: [DSC00047, DSC00052, DSC00055, DSC00059, DSC00077],
+      colors: "Black, Red",
+      material: "Cotton Blend",
+      size: "UK10",
+      height: "5'9\"",
     },
     {
       name: "Shoulder Black Crop Top",
+      price: "2,990",
       images: [DSC09965, DSC09972, DSC09982, DSC09988],
+      colors: "Black",
+      material: "Polyester",
+      size: "UK08",
+      height: "5'6\"",
     },
     {
       name: "Neck Top Valerie",
+      price: "3,250",
       images: [DSC09994, DSC09997, DSC09998],
+      colors: "Cream",
+      material: "Rayon",
+      size: "UK08",
+      height: "5'7\"",
     },
   ];
 
+  const handleProductClick = (top) => {
+    navigate("/product-details", { state: { product: top } });
+  };
+
   return (
-    <div
-      className="container-fluid py-5 mt-5"
-      style={{ backgroundColor: "#fafafa", fontFamily: "Poppins, sans-serif" }}
-    >
+    <div className="container-fluid py-5 mt-5 all-tops-container">
       {/* ✅ Header */}
       <div className="text-center mb-5">
-        <h2 className="fw-bold display-6 text-uppercase" style={{ letterSpacing: "2px" }}>
-          Crop Tops
+        <h2 className="fw-bold display-6 text-uppercase title-heading">
+          Crop Tops Collection
         </h2>
         <p className="text-muted mb-0">
-          Discover our stylish range of crop tops that blend comfort and confidence.
+          Explore our chic range of crop tops designed for comfort and elegance.
         </p>
       </div>
 
@@ -54,108 +73,50 @@ const CropTopsPage = () => {
             <div
               key={index}
               className="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center"
+              onClick={() => handleProductClick(top)}
+              style={{ cursor: "pointer" }}
             >
-              <ProductCard top={top} index={index} />
+              <div className="card border-0 shadow-sm h-100 product-card">
+                <div
+                  id={`carousel-${index}`}
+                  className="carousel slide carousel-fade"
+                  data-bs-ride="carousel"
+                  data-bs-interval="2500"
+                >
+                  <div className="carousel-inner">
+                    {top.images.map((img, imgIndex) => (
+                      <div
+                        key={imgIndex}
+                        className={`carousel-item ${imgIndex === 0 ? "active" : ""}`}
+                      >
+                        <img
+                          src={img}
+                          className="d-block w-100 product-img"
+                          alt={`${top.name} ${imgIndex + 1}`}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="card-body text-center py-4">
+                  <h5 className="card-title fw-semibold mb-2 text-uppercase">
+                    {top.name}
+                  </h5>
+                  <p className="price-text mb-3">LKR {top.price}</p>
+                </div>
+              </div>
             </div>
           ))}
         </div>
       </div>
 
       {/* ✅ Footer */}
-      <div className="text-center mt-5 text-muted" style={{ fontSize: "0.9rem" }}>
+      <div className="text-center mt-5 text-muted footer-text">
         © {new Date().getFullYear()} SN Collections — Crafted with elegance.
       </div>
     </div>
   );
 };
-
-// ✅ Product Card Component
-const ProductCard = ({ top, index }) => (
-  <div
-    className="card border-0 shadow-sm h-100"
-    style={{
-      borderRadius: "16px",
-      overflow: "hidden",
-      transition: "transform 0.3s ease, box-shadow 0.3s ease",
-      maxWidth: "360px",
-    }}
-  >
-    <div
-      id={`carousel-${index}`}
-      className="carousel slide"
-      data-bs-ride="carousel"
-      data-bs-interval="4000"
-    >
-      <div className="carousel-inner">
-        {top.images.map((img, imgIndex) => (
-          <div
-            key={imgIndex}
-            className={`carousel-item ${imgIndex === 0 ? "active" : ""}`}
-          >
-            <img
-              src={img}
-              className="d-block w-100"
-              alt={`${top.name} ${imgIndex + 1}`}
-              style={{
-                height: "420px",
-                objectFit: "cover",
-                borderTopLeftRadius: "16px",
-                borderTopRightRadius: "16px",
-              }}
-            />
-          </div>
-        ))}
-      </div>
-
-      {/* ✅ Carousel Controls */}
-      <button
-        className="carousel-control-prev"
-        type="button"
-        data-bs-target={`#carousel-${index}`}
-        data-bs-slide="prev"
-      >
-        <span
-          className="carousel-control-prev-icon bg-dark rounded-circle p-2"
-          aria-hidden="true"
-        ></span>
-        <span className="visually-hidden">Previous</span>
-      </button>
-      <button
-        className="carousel-control-next"
-        type="button"
-        data-bs-target={`#carousel-${index}`}
-        data-bs-slide="next"
-      >
-        <span
-          className="carousel-control-next-icon bg-dark rounded-circle p-2"
-          aria-hidden="true"
-        ></span>
-        <span className="visually-hidden">Next</span>
-      </button>
-    </div>
-
-    {/* ✅ Card Body */}
-    <div className="card-body text-center py-4">
-      <h5
-        className="card-title fw-semibold mb-3 text-uppercase"
-        style={{ fontSize: "1.1rem" }}
-      >
-        {top.name}
-      </h5>
-      <button
-        className="btn px-4 py-2 rounded-0 text-white"
-        style={{
-          backgroundColor: "#000",
-          letterSpacing: "1px",
-          transition: "all 0.3s ease",
-        }}
-        onMouseEnter={(e) => (e.target.style.backgroundColor = "#333")}
-        onMouseLeave={(e) => (e.target.style.backgroundColor = "#000")}
-      >
-        Buy Now
-      </button>
-    </div>
-  </div>
-);
 
 export default CropTopsPage;

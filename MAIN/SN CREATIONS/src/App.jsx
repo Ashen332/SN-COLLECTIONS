@@ -1,9 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
-
 import Navbar from "./pages/Navbar";
+import Footer from "./pages/Footer";
 import HomePage from "./pages/HomePage";
 import AllTops from "./pages/AllTopsPage";
 import LongSleeveTops from "./pages/LongSleeveTopsPage";
@@ -14,12 +12,26 @@ import MiniDressesPage from "./pages/MiniDressesPage";
 import MidiDresses from "./pages/MidiDressesPage";
 import MaxiDresses from "./pages/MaxiDressesPage";
 import Contact from "./pages/ContactUsPage";
+import ProductDetailsPage from "./pages/ProductDetailsPage";
+import CheckoutPage from "./pages/CheckoutPage";
+import OrderSuccessPage from "./pages/OrderSuccessPage"; // ✅ added
 
 function App() {
   return (
-    <>
+    <div
+      className="app-container"
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        backgroundColor: "#fff",
+      }}
+    >
+      {/* Persistent Navbar */}
       <Navbar />
-      <div style={{ marginTop: "100px" }}>
+
+      {/* Page Content */}
+      <main style={{ flex: 1, marginTop: "100px" }}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/tops/all" element={<AllTops />} />
@@ -31,9 +43,15 @@ function App() {
           <Route path="/dresses/midi" element={<MidiDresses />} />
           <Route path="/dresses/maxi" element={<MaxiDresses />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/product-details" element={<ProductDetailsPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/order-success" element={<OrderSuccessPage />} /> {/* ✅ new success page */}
         </Routes>
-      </div>
-    </>
+      </main>
+
+      {/* Persistent Footer */}
+      <Footer />
+    </div>
   );
 }
 

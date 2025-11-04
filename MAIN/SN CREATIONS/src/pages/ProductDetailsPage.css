@@ -1,0 +1,720 @@
+/* ==============================
+   PRODUCT DETAILS PAGE STYLING
+   ============================== */
+.product-details-container {
+  font-family: "Poppins", sans-serif;
+  color: #222;
+}
+
+/* Main Product Image */
+.product-main-img {
+  max-height: 550px;
+  width: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+  transition: opacity 0.5s ease-in-out;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Thumbnail Images */
+.thumbnail-img {
+  width: 80px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  background-color: #fff;
+}
+
+.thumbnail-img:hover {
+  transform: scale(1.05);
+}
+
+.thumbnail-img.active {
+  border: 2px solid #000;
+}
+
+/* Product Text */
+.price {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 0.5rem;
+}
+
+.detail-info p {
+  margin-bottom: 0.4rem;
+}
+
+/* Sizes */
+.size-btn {
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-weight: 500;
+  transition: all 0.25s ease-in-out;
+}
+
+.size-btn:hover,
+.size-btn:focus {
+  background-color: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+/* Quantity Section */
+.quantity {
+  margin-top: 1.5rem;
+}
+
+.quantity button {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  font-size: 1.2rem;
+}
+
+/* Add to Cart */
+.add-to-cart-btn {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #444;
+  transform: scale(1.02);
+}
+
+/* ==============================
+   MODAL STYLING
+   ============================== */
+.modal-content {
+  border-radius: 20px !important;
+  border: none !important;
+  background: #ffffff;
+  box-shadow: 0px 10px 35px rgba(0, 0, 0, 0.2);
+  animation: fadeInUp 0.4s ease-out;
+  font-family: "Poppins", sans-serif;
+}
+
+@keyframes fadeInUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-header {
+  border: none !important;
+  background-color: #fff;
+}
+
+.modal-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #111;
+}
+
+.btn-close {
+  filter: invert(0.5);
+  opacity: 0.8;
+}
+
+.modal-body {
+  padding: 2rem;
+}
+
+.modal-body img {
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.modal-body img:hover {
+  transform: scale(1.03);
+}
+
+.modal-body h6 {
+  font-weight: 600;
+  letter-spacing: 0.4px;
+}
+
+.modal-body small {
+  color: #666;
+}
+
+.cart-summary {
+  text-align: right;
+}
+
+.cart-summary h5 {
+  letter-spacing: 1px;
+  color: #111;
+}
+
+.cart-summary p {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 1.5rem;
+}
+
+.btn-dark {
+  background-color: #000 !important;
+  color: #fff !important;
+  border-radius: 50px !important;
+  padding: 10px 28px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-dark:hover {
+  background-color: #222 !important;
+}
+
+.btn-outline-dark {
+  border-radius: 50px !important;
+  padding: 10px 28px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-dark:hover {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+.modal-footer {
+  background: #fafafa;
+  border-top: none;
+  border-radius: 0 0 20px 20px !important;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.modal-footer p {
+  margin: 0;
+}
+
+/* ==============================
+   RESPONSIVE DESIGN
+   ============================== */
+@media (max-width: 992px) {
+  .product-main-img {
+    max-height: 450px;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-main-img {
+    max-height: 400px;
+  }
+  .thumbnail-img {
+    width: 60px;
+    height: 80px;
+  }
+  .modal-dialog {
+    margin: 1rem;
+  }
+  .modal-content {
+    text-align: center;
+  }
+  .add-to-cart-btn {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .product-details-container {
+    padding: 1rem;
+  }
+  .thumbnail-img {
+    width: 55px;
+    height: 70px;
+  }
+  .size-btn {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
+  .cart-summary {
+    text-align: center;
+  }
+  .modal-body img {
+    max-width: 70%;
+    margin-bottom: 1rem;
+  }
+}
+/* ============================================
+   CART POPUP (Modal) – PREMIUM DESIGN
+   ============================================ */
+.cart-modal {
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  animation: fadeUp 0.4s ease;
+  font-family: "Poppins", sans-serif;
+}
+
+@keyframes fadeUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.cart-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding: 1.5rem 2rem;
+  background-color: #fafafa;
+}
+
+.cart-modal-header h5 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.cart-modal-body {
+  padding: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: center;
+}
+
+.cart-modal-left {
+  flex: 1;
+  text-align: center;
+  border-right: 1px solid #eee;
+  padding-right: 2rem;
+}
+
+.cart-modal-left img {
+  max-height: 180px;
+  width: auto;
+  border-radius: 12px;
+  margin-top: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.cart-modal-left img:hover {
+  transform: scale(1.05);
+}
+
+.cart-modal-left h6 {
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.cart-modal-left p {
+  font-size: 0.95rem;
+  margin-bottom: 0.2rem;
+}
+
+.cart-modal-left small {
+  color: #777;
+}
+
+.cart-modal-right {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cart-modal-right h5 {
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  margin-bottom: 0.8rem;
+}
+
+.cart-total {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 1.5rem;
+}
+
+.cart-modal-footer {
+  background-color: #fafafa;
+  border-top: 1px solid #eee;
+  text-align: center;
+  padding: 1rem 2rem;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.cart-modal-btn {
+  border-radius: 50px;
+  padding: 10px 28px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+}
+
+.cart-modal-btn-dark {
+  background-color: #000;
+  color: #fff;
+  border: none;
+}
+
+.cart-modal-btn-dark:hover {
+  background-color: #222;
+}
+
+.cart-modal-btn-outline {
+  border: 1px solid #000;
+  background: none;
+  color: #000;
+}
+
+.cart-modal-btn-outline:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+/* ============================================
+   RESPONSIVE CART POPUP
+   ============================================ */
+@media (max-width: 768px) {
+  .cart-modal-body {
+    flex-direction: column;
+    padding: 1.5rem;
+  }
+
+  .cart-modal-left {
+    border-right: none;
+    padding-right: 0;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+  }
+
+  .cart-modal-right {
+    padding-top: 1rem;
+  }
+
+  .cart-modal-btn {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+}
+
+
+.cart-modal-content {
+  border-radius: 18px !important;
+  padding: 20px 25px;
+  background: #ffffff;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.check-circle {
+  width: 60px;
+  height: 60px;
+  background: #e8f9f0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.check-circle span {
+  color: #16a34a;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.proceed-btn {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.proceed-btn:hover {
+  background-color: #111;
+  transform: translateY(-2px);
+}
+
+/* Ensure white background fills entire area */
+.product-details-wrapper {
+  background-color: #fff !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  min-height: calc(100vh - 200px);
+}
+
+/* Footer flush fix */
+footer,
+.footer {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Prevent dark background bleed */
+body,
+#root {
+  background-color: #fff !important;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#root > div:last-child {
+  flex: 0 0 auto;
+}
+
+.quantity-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50% !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+.quantity-btn:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.quantity span {
+  min-width: 30px;
+  text-align: center;
+}
+img, button {
+  will-change: transform, opacity;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+.modal-backdrop.show {
+  opacity: 0.25 !important;
+}
+/* ==============================================
+   FIX: Remove Bootstrap's dark overlay & block
+   ============================================== */
+
+/* Remove the semi-transparent dark overlay */
+.modal-backdrop {
+  display: none !important;
+}
+
+/* Prevent dimming / brightness decrease */
+/* ==============================
+   MODAL STYLING (FINAL PRODUCTION)
+   ============================== */
+
+/* Remove Bootstrap’s dark overlay (brightness bug) */
+.modal-backdrop {
+  display: none !important;
+}
+
+/* Prevent dimming and blocking */
+.modal {
+  background: transparent !important;
+  pointer-events: auto !important;
+  z-index: 1055;
+}
+
+/* Center modal properly */
+.modal.show {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Smooth fade-in */
+.modal.fade .modal-dialog {
+  transform: translateY(25px);
+  opacity: 0;
+  transition: all 0.3s ease-out;
+}
+
+.modal.show .modal-dialog {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* --- Modal Content --- */
+.cart-modal-content {
+  background: #fff;
+  border-radius: 20px !important;
+  border: none !important;
+  padding: 2rem 2.5rem;
+  max-width: 850px;
+  width: 100%;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+  animation: popIn 0.35s ease;
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0.97);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* --- Header --- */
+.modal-header {
+  border: none !important;
+  background: transparent;
+  padding-bottom: 0.5rem;
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #111;
+}
+
+.btn-close {
+  filter: invert(0.5);
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.btn-close:hover {
+  opacity: 1;
+}
+
+/* --- Body --- */
+.modal-body {
+  padding: 2rem 1rem;
+}
+
+.modal-body .row {
+  align-items: center;
+}
+
+.modal-body .col-md-6:first-child {
+  border-right: 1px solid #eee;
+}
+
+@media (max-width: 768px) {
+  .modal-body .col-md-6:first-child {
+    border-right: none;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 1rem;
+  }
+}
+
+/* Left side (Product) */
+.check-circle {
+  width: 65px;
+  height: 65px;
+  background: #eafbee;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+}
+
+.check-circle span {
+  color: #16a34a;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.modal-body img {
+  border-radius: 10px;
+  max-height: 220px;
+  width: auto;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.modal-body img:hover {
+  transform: scale(1.03);
+}
+
+/* Right side (Cart Summary) */
+.proceed-btn {
+  background-color: #000;
+  color: #fff;
+  border-radius: 50px;
+  padding: 12px 28px;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.proceed-btn:hover {
+  background-color: #111;
+  transform: translateY(-2px);
+}
+
+.btn-outline-dark {
+  border-radius: 50px;
+  padding: 12px 28px;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-dark:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+/* --- Footer --- */
+.modal-footer {
+  background: #fafafa;
+  border-top: none;
+  border-radius: 0 0 20px 20px !important;
+  font-size: 0.9rem;
+  color: #777;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .cart-modal-content {
+    width: 95%;
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .modal-body {
+    padding: 1rem;
+  }
+
+  .btn-outline-dark,
+  .proceed-btn {
+    width: 100%;
+  }
+
+  .modal-body img {
+    max-width: 70%;
+    margin: 0 auto 1rem;
+  }
+}

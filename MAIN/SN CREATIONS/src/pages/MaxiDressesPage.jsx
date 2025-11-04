@@ -1,9 +1,9 @@
-// src/pages/MaxiDressesPage.jsx
-import React from "react";
+import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import "./AllTopsPage.css"; // ✅ reuse for consistent style
 
-// ✅ Import images properly from assets
+// ✅ Import images
 import DSC00823 from "../assets/DSC00823.jpg";
 import DSC00832 from "../assets/DSC00832.jpg";
 import DSC00845 from "../assets/DSC00845.jpg";
@@ -27,143 +27,99 @@ import DSC01071 from "../assets/DSC01071.jpg";
 import DSC01075 from "../assets/DSC01075.jpg";
 
 const MaxiDressesPage = () => {
+  const navigate = useNavigate();
+
   const maxiDresses = [
     {
       name: "Women Bodycon Dress with Side Slit",
+      price: "8,500",
       images: [DSC00823, DSC00832, DSC00845, DSC00849, DSC00854],
+      colors: "Black, Beige",
+      material: "Polyester Blend",
+      size: "UK08",
+      height: "5'8\"",
     },
     {
       name: "Graceful Grow Maxi Dress",
+      price: "7,800",
       images: [DSC00473, DSC00502, DSC00535, DSC00553],
+      colors: "Green, Blue",
+      material: "Cotton",
+      size: "UK10",
+      height: "5'7\"",
     },
     {
       name: "Casual White Long Dress",
+      price: "8,200",
       images: [DSC00871, DSC00883, DSC00913, DSC00921],
+      colors: "White",
+      material: "Linen",
+      size: "UK08",
+      height: "5'6\"",
     },
     {
       name: "White Aura Dress",
+      price: "8,900",
       images: [DSC00946, DSC01045, DSC01058, DSC01071, DSC01075],
+      colors: "White, Cream",
+      material: "Silk Blend",
+      size: "UK10",
+      height: "5'9\"",
     },
   ];
 
+  const handleProductClick = (dress) => {
+    navigate("/product-details", { state: { product: dress } });
+  };
+
   return (
-    <div
-      className="container-fluid py-5 mt-5"
-      style={{
-        backgroundColor: "#fafafa",
-        fontFamily: "Poppins, sans-serif",
-      }}
-    >
-      {/* ✅ Title Section */}
+    <div className="container-fluid py-5 mt-5 all-tops-container">
       <div className="text-center mb-5">
-        <h2
-          className="fw-bold display-6 text-uppercase"
-          style={{ letterSpacing: "2px" }}
-        >
+        <h2 className="fw-bold display-6 text-uppercase title-heading">
           Maxi Dresses Collection
         </h2>
         <p className="text-muted mb-0">
-          Elegant and timeless — explore our maxi dresses perfect for any
-          occasion.
+          Discover our elegant collection of maxi dresses, crafted for every occasion.
         </p>
       </div>
 
-      {/* ✅ Dress Cards Grid */}
       <div className="container">
         <div className="row g-4 justify-content-center">
           {maxiDresses.map((dress, index) => (
             <div
               key={index}
               className="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center"
+              onClick={() => handleProductClick(dress)}
+              style={{ cursor: "pointer" }}
             >
-              <div
-                className="card border-0 shadow-sm h-100"
-                style={{
-                  borderRadius: "16px",
-                  overflow: "hidden",
-                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                  maxWidth: "360px",
-                }}
-              >
-                {/* ✅ Carousel for each dress */}
+              <div className="card border-0 shadow-sm h-100 product-card">
                 <div
-                  id={`carouselMaxi${index}`}
-                  className="carousel slide"
+                  id={`carousel-${index}`}
+                  className="carousel slide carousel-fade"
                   data-bs-ride="carousel"
-                  data-bs-interval="4000"
+                  data-bs-interval="2500"
                 >
                   <div className="carousel-inner">
-                    {dress.images.map((img, i) => (
+                    {dress.images.map((img, imgIndex) => (
                       <div
-                        key={i}
-                        className={`carousel-item ${i === 0 ? "active" : ""}`}
+                        key={imgIndex}
+                        className={`carousel-item ${imgIndex === 0 ? "active" : ""}`}
                       >
                         <img
                           src={img}
-                          className="d-block w-100"
-                          alt={`${dress.name} ${i + 1}`}
-                          style={{
-                            height: "420px",
-                            objectFit: "cover",
-                            borderTopLeftRadius: "16px",
-                            borderTopRightRadius: "16px",
-                          }}
+                          className="d-block w-100 product-img"
+                          alt={`${dress.name} ${imgIndex + 1}`}
                         />
                       </div>
                     ))}
                   </div>
-
-                  {/* ✅ Controls */}
-                  <button
-                    className="carousel-control-prev"
-                    type="button"
-                    data-bs-target={`#carouselMaxi${index}`}
-                    data-bs-slide="prev"
-                  >
-                    <span
-                      className="carousel-control-prev-icon bg-dark rounded-circle p-2"
-                      aria-hidden="true"
-                    ></span>
-                    <span className="visually-hidden">Previous</span>
-                  </button>
-                  <button
-                    className="carousel-control-next"
-                    type="button"
-                    data-bs-target={`#carouselMaxi${index}`}
-                    data-bs-slide="next"
-                  >
-                    <span
-                      className="carousel-control-next-icon bg-dark rounded-circle p-2"
-                      aria-hidden="true"
-                    ></span>
-                    <span className="visually-hidden">Next</span>
-                  </button>
                 </div>
 
-                {/* ✅ Card Body */}
                 <div className="card-body text-center py-4">
-                  <h5
-                    className="card-title fw-semibold text-uppercase mb-3"
-                    style={{ fontSize: "1.1rem" }}
-                  >
+                  <h5 className="card-title fw-semibold mb-2 text-uppercase">
                     {dress.name}
                   </h5>
-                  <button
-                    className="btn px-4 py-2 rounded-0 text-white"
-                    style={{
-                      backgroundColor: "#000",
-                      letterSpacing: "1px",
-                      transition: "all 0.3s ease",
-                    }}
-                    onMouseEnter={(e) =>
-                      (e.target.style.backgroundColor = "#333")
-                    }
-                    onMouseLeave={(e) =>
-                      (e.target.style.backgroundColor = "#000")
-                    }
-                  >
-                    Buy Now
-                  </button>
+                  <p className="price-text mb-3">LKR {dress.price}</p>
                 </div>
               </div>
             </div>
@@ -171,12 +127,8 @@ const MaxiDressesPage = () => {
         </div>
       </div>
 
-      {/* ✅ Footer */}
-      <div
-        className="text-center mt-5 text-muted"
-        style={{ fontSize: "0.9rem" }}
-      >
-        © {new Date().getFullYear()} SN Collections — Elegance in Every Stitch.
+      <div className="text-center mt-5 text-muted footer-text">
+        © {new Date().getFullYear()} SN Collections — Crafted with elegance.
       </div>
     </div>
   );

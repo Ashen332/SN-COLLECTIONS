@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./HomePage.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import Navbar from "./Navbar";
 
 // Hero images
 import img1 from "../assets/1.png";
@@ -21,6 +22,7 @@ import feat1 from "../assets/DSC00727.jpg"; // Mini Dress
 import feat2 from "../assets/DSC00652.jpg"; // Midi Dress
 import feat3 from "../assets/DSC00535.jpg"; // Maxi Dress
 import feat4 from "../assets/DSC00206.jpg"; // Top
+
 
 const images = [img1, img2, img3, img4];
 
@@ -63,74 +65,7 @@ const HomePage = () => {
           scrolled ? "navbar-scrolled" : "navbar-transparent"
         }`}
       >
-        <Link className="navbar-brand fw-bold fs-3 text-dark" to="/">
-          SN COLLECTIONS
-        </Link>
-
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-
-        <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
-          <ul className="navbar-nav">
-            {/* Tops Dropdown */}
-            <li className="nav-item dropdown mx-3">
-              <a
-                className="nav-link dropdown-toggle text-dark fw-semibold"
-                href="#"
-                id="topsDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                TOPS
-              </a>
-              <ul className="dropdown-menu border-0 shadow-sm p-3" aria-labelledby="topsDropdown">
-                <h6 className="dropdown-header fw-bold text-uppercase text-muted">Tops</h6>
-                <li><Link className="dropdown-item" to="/tops/all">All Tops</Link></li>
-                <li><hr className="dropdown-divider" /></li>
-                <li><Link className="dropdown-item" to="/tops/long-sleeve">Long Sleeve Tops</Link></li>
-                <li><Link className="dropdown-item" to="/tops/short-sleeve">Short Sleeve Tops</Link></li>
-                <li><Link className="dropdown-item" to="/tops/crop">Crop Tops</Link></li>
-              </ul>
-            </li>
-
-            {/* Dresses Dropdown */}
-            <li className="nav-item dropdown mx-3">
-              <a
-                className="nav-link dropdown-toggle text-dark fw-semibold"
-                href="#"
-                id="dressesDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                DRESSES
-              </a>
-              <ul className="dropdown-menu border-0 shadow-sm p-3" aria-labelledby="dressesDropdown">
-                <h6 className="dropdown-header fw-bold text-uppercase text-muted">Dresses</h6>
-                <li><Link className="dropdown-item" to="/dresses/all">All Dresses</Link></li>
-                <li><hr className="dropdown-divider" /></li>
-                <li><Link className="dropdown-item" to="/dresses/mini">Mini Dresses</Link></li>
-                <li><Link className="dropdown-item" to="/dresses/midi">Midi Dresses</Link></li>
-                <li><Link className="dropdown-item" to="/dresses/maxi">Maxi Dresses</Link></li>
-              </ul>
-            </li>
-
-            {/* Contact */}
-            <li className="nav-item mx-3">
-              <Link className="nav-link text-dark fw-semibold" to="/contact">CONTACT</Link>
-            </li>
-          </ul>
-        </div>
+       <Navbar/>
       </nav>
 
       {/* ===== Hero Section ===== */}
@@ -248,7 +183,7 @@ const HomePage = () => {
                     <h5 className="card-title fw-semibold text-dark text-uppercase" style={{ letterSpacing: "1px" }}>
                       {prod.name}
                     </h5>
-                    <button className="btn btn-dark rounded-0 mt-2">Buy Now</button>
+                    
                   </div>
                 </div>
               </Link>
@@ -258,9 +193,8 @@ const HomePage = () => {
       </section>
 
       {/* ===== Footer ===== */}
-      <footer className="text-white bg-dark py-4 text-center">
-        © {new Date().getFullYear()} SN Collections — Grace in every dress.
-      </footer>
+      {/* ===== Footer ===== */}
+
     </div>
   );
 };

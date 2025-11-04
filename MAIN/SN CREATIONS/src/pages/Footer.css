@@ -1,0 +1,142 @@
+.footer {
+  background-color: #111;
+  color: #f5f5f5;
+  font-family: "Poppins", sans-serif;
+  padding-top: 80px; /* ⬆️ increased from 60px for more space */
+  padding-bottom: 40px; /* ⬆️ slightly more breathing room */
+}
+.footer a {
+  color: #f5f5f5;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer a:hover {
+  color: #ffce00; /* subtle accent color */
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.footer-brand {
+  flex: 1;
+  min-width: 250px;
+}
+
+.brand-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+}
+
+.brand-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #ccc;
+  max-width: 300px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 50px;
+  flex: 1;
+  min-width: 250px;
+}
+
+.footer-links h6 {
+  font-weight: 600;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 8px;
+  font-size: 0.88rem;
+}
+
+.footer-social {
+  flex: 1;
+  min-width: 200px;
+}
+
+.footer-social h6 {
+  font-weight: 600;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+.social-icons a {
+  font-size: 1.2rem;
+  margin-right: 15px;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: #ffce00;
+}
+
+.footer-bottom {
+  border-top: 1px solid #222;
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 20px;
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer-top {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .footer-links {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .footer-social {
+    text-align: left;
+  }
+}
+
+/* ===== Layout Fix (removes dark section above footer) ===== */
+body {
+  margin: 0;
+  background-color: #fff; /* or your preferred background color */
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background-color: #fff; /* ensures no dark band appears */
+}
+
+main {
+  flex: 1;
+}
+
+

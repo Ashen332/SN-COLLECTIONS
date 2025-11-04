@@ -1,8 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import "./AllTopsPage.css"; // ✅ use same modern black-white styling
 
-// ✅ Import all dress images from assets
+// ✅ Import images
 import DSC00660 from "../assets/DSC00660.jpg";
 import DSC00687 from "../assets/DSC00687.jpg";
 import DSC00727 from "../assets/DSC00727.jpg";
@@ -52,139 +54,156 @@ import DSC01071 from "../assets/DSC01071.jpg";
 import DSC01075 from "../assets/DSC01075.jpg";
 
 const DressesPage = () => {
-  const miniDresses = [
-    { name: "Cami Tiered Mini Dress", images: [DSC00660, DSC00687, DSC00727, DSC00735] },
-    { name: "Twist Front Cami Dress", images: [DSC00230, DSC00264, DSC00280, DSC00284] },
-    { name: "Sunset Tie Dye Dress", images: [DSC00312, DSC00347, DSC00369, DSC00376] },
+  const navigate = useNavigate();
+
+  const allDresses = [
+    {
+      name: "Cami Tiered Mini Dress",
+      price: "3,490",
+      images: [DSC00660, DSC00687, DSC00727, DSC00735],
+      colors: "White",
+      material: "Cotton Blend",
+      size: "UK10",
+      height: "5'7\"",
+    },
+    {
+      name: "Twist Front Cami Dress",
+      price: "3,890",
+      images: [DSC00230, DSC00264, DSC00280, DSC00284],
+      colors: "Beige",
+      material: "Polyester",
+      size: "UK10",
+      height: "5'7\"",
+    },
+    {
+      name: "Sunset Tie Dye Dress",
+      price: "2,100",
+      images: [DSC00312, DSC00347, DSC00369, DSC00376],
+      colors: "White",
+      material: "Viscose Rayon",
+      size: "UK10",
+      height: "5'6\"",
+    },
+    {
+      name: "Elegant Floral V-Neck Midi Dress",
+      price: "3,990",
+      images: [DSC00399, DSC00430, DSC00447, DSC00456, DSC00458],
+      colors: "Floral",
+      material: "Cotton Blend",
+      size: "UK10",
+      height: "5'7\"",
+    },
+    {
+      name: "Ocean Rhythm Midi Dress",
+      price: "4,200",
+      images: [DSC00597, DSC00628, DSC00645, DSC00652],
+      colors: "Blue",
+      material: "Waffle Knit",
+      size: "UK10",
+      height: "5'5\"",
+    },
+    {
+      name: "Graceful Grow Maxi Dress",
+      price: "5,600",
+      images: [DSC00473, DSC00502, DSC00535, DSC00553],
+      colors: "Green",
+      material: "Cupro",
+      size: "UK10",
+      height: "5'6\"",
+    },
+    {
+      name: "Casual White Long Dress",
+      price: "4,990",
+      images: [DSC00871, DSC00883, DSC00913, DSC00921],
+      colors: "White",
+      material: "Cotton Satin",
+      size: "UK10",
+      height: "5'6\"",
+    },
+    {
+      name: "White Aura Dress",
+      price: "8,500",
+      images: [DSC00946, DSC01045, DSC01058, DSC01071, DSC01075],
+      colors: "White",
+      material: "Jacquard waffle knit & satin sleeves",
+      size: "UK10",
+      height: "5'5\"",
+    },
+    {
+      name: "Women Bodycon Dress with Side Slit",
+      price: "4,450",
+      images: [DSC00823, DSC00832, DSC00845, DSC00849, DSC00854],
+      colors: "Black",
+      material: "Lycra Blend",
+      size: "UK10",
+      height: "5'7\"",
+    },
   ];
 
-  const midiDresses = [
-    { name: "Elegant Floral V-Neck Midi Dress", images: [DSC00399, DSC00430, DSC00447, DSC00456, DSC00458] },
-    { name: "Ocean Rhythm Midi Dress", images: [DSC00597, DSC00628, DSC00645, DSC00652] },
-  ];
-
-  const maxiDresses = [
-    { name: "Women Bodycon Dress with Side Slit", images: [DSC00823, DSC00832, DSC00845, DSC00849, DSC00854] },
-    { name: "Graceful Grow Maxi Dress", images: [DSC00473, DSC00502, DSC00535, DSC00553] },
-    { name: "Casual White Long Dress", images: [DSC00871, DSC00883, DSC00913, DSC00921] },
-    { name: "White Aura Dress", images: [DSC00946, DSC01045, DSC01058, DSC01071, DSC01075] },
-  ];
-
-  const renderDresses = (dresses, category) => (
-    <section className="mb-5">
-      <h3 className="text-center fw-bold text-uppercase mb-4" style={{ letterSpacing: "2px" }}>
-        {category}
-      </h3>
-      <div className="row g-4 justify-content-center">
-        {dresses.map((dress, index) => (
-          <div key={index} className="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center">
-            <DressCard dress={dress} index={`${category}-${index}`} />
-          </div>
-        ))}
-      </div>
-    </section>
-  );
+  const handleProductClick = (dress) => {
+    navigate("/product-details", { state: { product: dress } });
+  };
 
   return (
-    <div
-      className="container-fluid py-5 mt-5"
-      style={{ backgroundColor: "#fafafa", fontFamily: "Poppins, sans-serif" }}
-    >
+    <div className="container-fluid py-5 mt-5 all-tops-container">
       <div className="text-center mb-5">
-        <h2 className="fw-bold display-6 text-uppercase" style={{ letterSpacing: "2px" }}>
+        <h2 className="fw-bold display-6 text-uppercase title-heading">
           All Dresses Collection
         </h2>
         <p className="text-muted mb-0">
-          Explore our stunning mini, midi, and maxi dresses — perfect for every moment.
+          Explore our stunning mini, midi, and maxi dresses — designed for elegance.
         </p>
       </div>
 
       <div className="container">
-        {renderDresses(miniDresses, "Mini Dresses")}
-        {renderDresses(midiDresses, "Midi Dresses")}
-        {renderDresses(maxiDresses, "Maxi Dresses")}
+        <div className="row g-4 justify-content-center">
+          {allDresses.map((dress, index) => (
+            <div
+              key={index}
+              className="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center"
+              onClick={() => handleProductClick(dress)}
+              style={{ cursor: "pointer" }}
+            >
+              <div className="card border-0 shadow-sm h-100 product-card">
+                <div
+                  id={`carousel-${index}`}
+                  className="carousel slide carousel-fade"
+                  data-bs-ride="carousel"
+                  data-bs-interval="3000"
+                >
+                  <div className="carousel-inner">
+                    {dress.images.map((img, i) => (
+                      <div
+                        key={i}
+                        className={`carousel-item ${i === 0 ? "active" : ""}`}
+                      >
+                        <img
+                          src={img}
+                          className="d-block w-100 product-img"
+                          alt={`${dress.name} ${i + 1}`}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="card-body text-center py-4">
+                  <h5 className="card-title fw-semibold mb-2 text-uppercase">
+                    {dress.name}
+                  </h5>
+                  <p className="price-text mb-3">LKR {dress.price}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
-      <div className="text-center mt-5 text-muted" style={{ fontSize: "0.9rem" }}>
+      <div className="text-center mt-5 text-muted footer-text">
         © {new Date().getFullYear()} SN Collections — Grace in every dress.
       </div>
     </div>
   );
 };
-
-// ✅ Reusable Dress Card Component
-const DressCard = ({ dress, index }) => (
-  <div
-    className="card border-0 shadow-sm h-100"
-    style={{
-      borderRadius: "16px",
-      overflow: "hidden",
-      transition: "transform 0.3s ease, box-shadow 0.3s ease",
-      maxWidth: "360px",
-    }}
-  >
-    <div
-      id={`carousel-${index}`}
-      className="carousel slide"
-      data-bs-ride="carousel"
-      data-bs-interval="4000"
-    >
-      <div className="carousel-inner">
-        {dress.images.map((img, i) => (
-          <div key={i} className={`carousel-item ${i === 0 ? "active" : ""}`}>
-            <img
-              src={img}
-              className="d-block w-100"
-              alt={`${dress.name} ${i + 1}`}
-              style={{
-                height: "420px",
-                objectFit: "cover",
-                borderTopLeftRadius: "16px",
-                borderTopRightRadius: "16px",
-              }}
-            />
-          </div>
-        ))}
-      </div>
-
-      <button
-        className="carousel-control-prev"
-        type="button"
-        data-bs-target={`#carousel-${index}`}
-        data-bs-slide="prev"
-      >
-        <span className="carousel-control-prev-icon bg-dark rounded-circle p-2" aria-hidden="true"></span>
-        <span className="visually-hidden">Previous</span>
-      </button>
-      <button
-        className="carousel-control-next"
-        type="button"
-        data-bs-target={`#carousel-${index}`}
-        data-bs-slide="next"
-      >
-        <span className="carousel-control-next-icon bg-dark rounded-circle p-2" aria-hidden="true"></span>
-        <span className="visually-hidden">Next</span>
-      </button>
-    </div>
-
-    <div className="card-body text-center py-4">
-      <h5 className="card-title fw-semibold mb-3 text-uppercase" style={{ fontSize: "1.1rem" }}>
-        {dress.name}
-      </h5>
-      <button
-        className="btn px-4 py-2 rounded-0 text-white"
-        style={{
-          backgroundColor: "#000",
-          letterSpacing: "1px",
-          transition: "all 0.3s ease",
-        }}
-        onMouseEnter={(e) => (e.target.style.backgroundColor = "#333")}
-        onMouseLeave={(e) => (e.target.style.backgroundColor = "#000")}
-      >
-        Buy Now
-      </button>
-    </div>
-  </div>
-);
 
 export default DressesPage;

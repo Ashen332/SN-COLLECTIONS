@@ -16,24 +16,28 @@ const CheckoutPage = () => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
     setCartItems(storedCart);
     const sub = storedCart.reduce((acc, item) => acc + item.total, 0);
-    setSubtotal(sub);
     const shippingCost = sub > 10000 ? 0 : 750;
+    setSubtotal(sub);
     setShipping(shippingCost);
     setTotal(sub + shippingCost);
   }, []);
 
-  // Convert uploaded file to Base64 for EmailJS
-  const convertFileToBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (err) => reject(err);
-    });
-  };
+  const handleFileChange = (e) => setFile(e.target.files[0]);
 
   const handlePlaceOrder = async (e) => {
     e.preventDefault();
+    const form = e.target;
+
+    const orderData = {
+      name: `${form.firstName.value} ${form.lastName.value}`,
+      email: form.email.value,
+      address: form.address.value,
+      city: form.city.value,
+      postal: form.postal.value,
+      phone: form.phone.value,
+      payment: paymentMethod,
+      total,
+    };
 
     if (paymentMethod === "cdm" && !file) {
       alert("Please upload your CDM payment slip before placing the order.");
@@ -41,55 +45,27 @@ const CheckoutPage = () => {
     }
 
     setSending(true);
-    const form = e.target;
-
-    const formData = {
-      name: `${form.firstName.value} ${form.lastName.value}`,
-      email: form.email.value,
-      address: form.address.value,
-      city: form.city.value,
-      postal: form.postal.value,
-      phone: form.phone.value,
-      payment: paymentMethod === "cdm" ? "CDM Deposit" : "Cash on Delivery",
-      total: `LKR ${total.toLocaleString()}`,
-      cart_summary: cartItems
-        .map((item) => `${item.name} (${item.size}/${item.color}) x${item.quantity}`)
-        .join(", "),
-    };
-
     try {
-      let attachment = "";
-      if (file && paymentMethod === "cdm") {
-        attachment = await convertFileToBase64(file);
-      }
-
-      // ✅ Send email using EmailJS
       await emailjs.send(
         "service_1jauqqn",
         "template_y1sw6hl",
         {
-          ...formData,
+          ...orderData,
           message:
             paymentMethod === "cdm"
               ? "Customer selected CDM Deposit and attached payment slip."
               : "Customer selected Cash on Delivery.",
-          attachment, // base64 file attachment
         },
         "d2jfBxd_FpaDoKw9M"
       );
 
-      // ✅ Send WhatsApp message
-      const encodedMsg = encodeURIComponent(
-        `Hi SN Collection,\nI've placed an order via your website.\n\nName: ${formData.name}\nTotal: ${formData.total}\nPayment Method: ${formData.payment}\n\nPlease confirm.`
-      );
-      window.open(`https://wa.me/94776879778?text=${encodedMsg}`, "_blank");
-
+      localStorage.setItem("lastOrder", JSON.stringify(orderData));
       localStorage.removeItem("cart");
-      alert("✅ Order placed successfully! We'll contact you soon.");
-      window.location.href = "/";
-    } catch (error) {
-      console.error("EmailJS Error:", error);
-      alert("❌ Something went wrong. Please try again later.");
+
+      window.location.href = "/order-success";
+    } catch (err) {
+      console.error("Email send error:", err);
+      alert("Error sending your order. Please try again.");
     } finally {
       setSending(false);
     }
@@ -100,7 +76,7 @@ const CheckoutPage = () => {
       <div className="container">
         <h2 className="fw-bold text-uppercase mb-5 text-center">Checkout</h2>
         <div className="row g-5">
-          {/* Left: Billing Details */}
+          {/* LEFT: Billing Form */}
           <div className="col-lg-7">
             <div className="card border-0 shadow-sm p-4 rounded-4">
               <h5 className="fw-semibold mb-4">Billing Details</h5>
@@ -131,20 +107,20 @@ const CheckoutPage = () => {
                     <input name="postal" type="text" className="form-control" required />
                   </div>
                   <div className="col-md-12">
-                    <label className="form-label fw-semibold">Phone Number</label>
+                    <label className="form-label fw-semibold">Phone</label>
                     <input name="phone" type="text" className="form-control" required />
                   </div>
                 </div>
 
                 <div className="mt-4">
                   <h6 className="fw-semibold mb-2">Payment Method</h6>
+
                   <div className="form-check mb-2">
                     <input
                       className="form-check-input"
                       type="radio"
                       name="payment"
                       id="cod"
-                      value="cod"
                       checked={paymentMethod === "cod"}
                       onChange={() => setPaymentMethod("cod")}
                     />
@@ -152,13 +128,13 @@ const CheckoutPage = () => {
                       Cash on Delivery
                     </label>
                   </div>
+
                   <div className="form-check mb-3">
                     <input
                       className="form-check-input"
                       type="radio"
                       name="payment"
                       id="cdm"
-                      value="cdm"
                       checked={paymentMethod === "cdm"}
                       onChange={() => setPaymentMethod("cdm")}
                     />
@@ -168,30 +144,28 @@ const CheckoutPage = () => {
                   </div>
 
                   {paymentMethod === "cdm" && (
-                    <div className="cdm-details p-3 rounded-3 bg-light border mt-3">
-                      <h6 className="fw-bold mb-3 text-uppercase">Bank Deposit Details</h6>
-                      <ul className="list-unstyled mb-3">
-                        <li><strong>Bank Name:</strong> Commercial Bank of Ceylon PLC</li>
-                        <li><strong>Branch:</strong> Kiribathgoda Branch</li>
+                    <div className="cdm-box p-3 bg-light border rounded-3 mt-3">
+                      <h6 className="fw-bold mb-3 text-uppercase">Bank Details</h6>
+                      <ul className="list-unstyled small mb-3">
+                        <li><strong>Bank:</strong> S @ N Collections Pvt Ltd</li>
+                        <li><strong>Branch:</strong> 035020682299-S/A</li>
                         <li><strong>Account Name:</strong> S.N. Collection</li>
-                        <li><strong>Account Number:</strong> 9040088562</li>
+                        <li><strong>Account No:</strong> 035010048841-C/A</li>
                       </ul>
 
-                      <div className="mb-3">
-                        <label className="form-label fw-semibold">
-                          Upload Payment Slip (Image or PDF)
-                        </label>
-                        <input
-                          type="file"
-                          className="form-control"
-                          accept="image/*,.pdf"
-                          onChange={(e) => setFile(e.target.files[0])}
-                          required
-                        />
-                      </div>
-                      <p className="small text-muted">
-                        After uploading, your payment slip will be sent to our email and WhatsApp for confirmation.
-                      </p>
+                      <label className="form-label fw-semibold">
+                        Upload Payment Slip (Image / PDF)
+                      </label>
+                      <input
+                        type="file"
+                        className="form-control"
+                        accept="image/*,.pdf"
+                        onChange={handleFileChange}
+                        required
+                      />
+                      <small className="text-muted">
+                        Please upload your payment slip to confirm deposit.
+                      </small>
                     </div>
                   )}
                 </div>
@@ -207,51 +181,42 @@ const CheckoutPage = () => {
             </div>
           </div>
 
-          {/* Right: Order Summary */}
+          {/* RIGHT: Summary */}
           <div className="col-lg-5">
             <div className="card border-0 shadow-sm p-4 rounded-4">
               <h5 className="fw-semibold mb-4">Order Summary</h5>
               {cartItems.length > 0 ? (
                 <>
-                  <div className="cart-summary">
-                    {cartItems.map((item, index) => (
-                      <div key={index} className="d-flex justify-content-between align-items-center mb-3">
-                        <div className="d-flex align-items-center">
-                          <img
-                            src={item.image}
-                            alt={item.name}
-                            className="rounded-3 me-3"
-                            style={{ width: "60px", height: "60px", objectFit: "cover" }}
-                          />
-                          <div>
-                            <p className="mb-0 fw-semibold small">{item.name}</p>
-                            <small className="text-muted">
-                              {item.size} / {item.color}
-                            </small>
-                          </div>
+                  {cartItems.map((item, i) => (
+                    <div key={i} className="d-flex justify-content-between align-items-center mb-3">
+                      <div className="d-flex align-items-center">
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="rounded-3 me-3"
+                          style={{ width: "60px", height: "60px", objectFit: "cover" }}
+                        />
+                        <div>
+                          <p className="mb-0 fw-semibold small">{item.name}</p>
+                          <small className="text-muted">{item.size} / {item.color}</small>
                         </div>
-                        <p className="fw-semibold mb-0 small">x{item.quantity}</p>
                       </div>
-                    ))}
-                  </div>
-
+                      <p className="fw-semibold mb-0 small">x{item.quantity}</p>
+                    </div>
+                  ))}
                   <hr />
-                  <div className="d-flex justify-content-between">
-                    <p className="text-muted mb-1">Subtotal</p>
-                    <p className="fw-semibold mb-1">LKR {subtotal.toLocaleString()}</p>
+                  <div className="d-flex justify-content-between small">
+                    <span>Subtotal</span>
+                    <span>LKR {subtotal.toLocaleString()}</span>
                   </div>
-                  <div className="d-flex justify-content-between">
-                    <p className="text-muted mb-1">Shipping</p>
-                    <p className="fw-semibold mb-1">
-                      {shipping === 0 ? "Free" : `LKR ${shipping}`}
-                    </p>
+                  <div className="d-flex justify-content-between small">
+                    <span>Shipping</span>
+                    <span>{shipping ? `LKR ${shipping}` : "Free"}</span>
                   </div>
                   <hr />
-                  <div className="d-flex justify-content-between">
-                    <h6 className="fw-bold text-uppercase mb-0">Total</h6>
-                    <h6 className="fw-bold mb-0 text-dark">
-                      LKR {total.toLocaleString()}
-                    </h6>
+                  <div className="d-flex justify-content-between fw-bold">
+                    <span>Total</span>
+                    <span>LKR {total.toLocaleString()}</span>
                   </div>
                 </>
               ) : (
