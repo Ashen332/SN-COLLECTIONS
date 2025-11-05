@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./pages/Navbar.jsx";
+import NavBar from "./pages/NavBar.jsx";
 import Footer from "./pages/Footer.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import AllTops from "./pages/AllTopsPage.jsx";
@@ -29,7 +29,7 @@ function App() {
       }}
     >
       {/* Persistent Navbar */}
-      <Navbar />
+      <NavBar />
 
       {/* Page Content */}
       <main style={{ flex: 1, marginTop: "100px" }}>
