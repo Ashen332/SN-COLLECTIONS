@@ -167,7 +167,7 @@ const ProductDetailsPage = () => {
             <div className="size-section mt-4">
               <p className="mb-1 fw-semibold">Available Sizes</p>
               <div className="d-flex gap-2 flex-wrap">
-                {["UK06", "UK08", "UK10", "UK12", "UK14", "UK16"].map((size) => (
+                {["XS", "S", "M", "L", "XL", "2XL"].map((size) => (
                   <button
                     key={size}
                     className={`btn btn-outline-dark size-btn ${

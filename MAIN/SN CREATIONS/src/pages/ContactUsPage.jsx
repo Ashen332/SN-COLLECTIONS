@@ -1,263 +1,163 @@
-import React, { useEffect, useState } from "react";
-import emailjs from "emailjs-com";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./CheckoutPage.css";
+import { FaEnvelope, FaPhoneAlt, FaInstagram, FaFacebook } from "react-icons/fa";
+import emailjs from "emailjs-com";
+import "./ContactUsPage.css";
 
-const CheckoutPage = () => {
-  const [cartItems, setCartItems] = useState([]);
-  const [subtotal, setSubtotal] = useState(0);
-  const [shipping, setShipping] = useState(0);
-  const [total, setTotal] = useState(0);
-  const [paymentMethod, setPaymentMethod] = useState("cod");
-  const [file, setFile] = useState(null);
-  const [sending, setSending] = useState(false);
+const ContactUsPage = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
 
-  useEffect(() => {
-    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
-    setCartItems(storedCart);
-    const sub = storedCart.reduce((acc, item) => acc + item.total, 0);
-    setSubtotal(sub);
-    const shippingCost = sub > 10000 ? 0 : 750;
-    setShipping(shippingCost);
-    setTotal(sub + shippingCost);
-  }, []);
+  const [isSending, setIsSending] = useState(false);
 
-  // Convert uploaded file to Base64 for EmailJS
-  const convertFileToBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (err) => reject(err);
-    });
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handlePlaceOrder = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    setIsSending(true);
 
-    if (paymentMethod === "cdm" && !file) {
-      alert("Please upload your CDM payment slip before placing the order.");
-      return;
-    }
+    // ✅ Replace these IDs with your own from EmailJS dashboard
+    const serviceID = "service_1jauqqn";
+    const templateID = "template_y1sw6hl";
+    const publicKey = "d2jfBxd_FpaDoKw9M";
 
-    setSending(true);
-    const form = e.target;
-
-    const formData = {
-      name: `${form.firstName.value} ${form.lastName.value}`,
-      email: form.email.value,
-      address: form.address.value,
-      city: form.city.value,
-      postal: form.postal.value,
-      phone: form.phone.value,
-      payment: paymentMethod === "cdm" ? "CDM Deposit" : "Cash on Delivery",
-      total: `LKR ${total.toLocaleString()}`,
-      cart_summary: cartItems
-        .map((item) => `${item.name} (${item.size}/${item.color}) x${item.quantity}`)
-        .join(", "),
-    };
-
-    try {
-      let attachment = "";
-      if (file && paymentMethod === "cdm") {
-        attachment = await convertFileToBase64(file);
-      }
-
-      // ✅ Send email using EmailJS
-      await emailjs.send(
-        "service_1jauqqn",
-        "template_y1sw6hl",
-        {
-          ...formData,
-          message:
-            paymentMethod === "cdm"
-              ? "Customer selected CDM Deposit and attached payment slip."
-              : "Customer selected Cash on Delivery.",
-          attachment, // base64 file attachment
-        },
-        "d2jfBxd_FpaDoKw9M"
-      );
-
-      // ✅ Send WhatsApp message
-      const encodedMsg = encodeURIComponent(
-        `Hi SN Collection,\nI've placed an order via your website.\n\nName: ${formData.name}\nTotal: ${formData.total}\nPayment Method: ${formData.payment}\n\nPlease confirm.`
-      );
-      window.open(`https://wa.me/94776879778?text=${encodedMsg}`, "_blank");
-
-      localStorage.removeItem("cart");
-      alert("✅ Order placed successfully! We'll contact you soon.");
-      window.location.href = "/";
-    } catch (error) {
-      console.error("EmailJS Error:", error);
-      alert("❌ Something went wrong. Please try again later.");
-    } finally {
-      setSending(false);
-    }
+    emailjs
+      .send(serviceID, templateID, formData, publicKey)
+      .then(() => {
+        alert(`Thank you ${formData.name}, your message has been sent!`);
+        setFormData({ name: "", email: "", message: "" });
+        setIsSending(false);
+      })
+      .catch((error) => {
+        console.error("Email send error:", error);
+        alert("Something went wrong. Please try again later.");
+        setIsSending(false);
+      });
   };
 
   return (
-    <div className="checkout-wrapper py-5 bg-light">
-      <div className="container">
-        <h2 className="fw-bold text-uppercase mb-5 text-center">Checkout</h2>
-        <div className="row g-5">
-          {/* Left: Billing Details */}
-          <div className="col-lg-7">
-            <div className="card border-0 shadow-sm p-4 rounded-4">
-              <h5 className="fw-semibold mb-4">Billing Details</h5>
-              <form onSubmit={handlePlaceOrder}>
-                <div className="row g-3">
-                  <div className="col-md-6">
-                    <label className="form-label fw-semibold">First Name</label>
-                    <input name="firstName" type="text" className="form-control" required />
-                  </div>
-                  <div className="col-md-6">
-                    <label className="form-label fw-semibold">Last Name</label>
-                    <input name="lastName" type="text" className="form-control" required />
-                  </div>
-                  <div className="col-md-12">
-                    <label className="form-label fw-semibold">Email</label>
-                    <input name="email" type="email" className="form-control" required />
-                  </div>
-                  <div className="col-md-12">
-                    <label className="form-label fw-semibold">Address</label>
-                    <input name="address" type="text" className="form-control" required />
-                  </div>
-                  <div className="col-md-6">
-                    <label className="form-label fw-semibold">City</label>
-                    <input name="city" type="text" className="form-control" required />
-                  </div>
-                  <div className="col-md-6">
-                    <label className="form-label fw-semibold">Postal Code</label>
-                    <input name="postal" type="text" className="form-control" required />
-                  </div>
-                  <div className="col-md-12">
-                    <label className="form-label fw-semibold">Phone Number</label>
-                    <input name="phone" type="text" className="form-control" required />
-                  </div>
-                </div>
+    <div className="contact-page d-flex align-items-center justify-content-center py-5 mt-5">
+      <div className="contact-card shadow-lg p-4 p-md-5 rounded-4">
+        <div className="row g-4">
+          {/* Contact Info */}
+          <div className="col-md-5 bg-dark text-white rounded-4 p-4 contact-info d-flex flex-column justify-content-center">
+            <h3 className="fw-bold mb-4 text-uppercase text-center">
+              Get in Touch
+            </h3>
 
-                <div className="mt-4">
-                  <h6 className="fw-semibold mb-2">Payment Method</h6>
-                  <div className="form-check mb-2">
-                    <input
-                      className="form-check-input"
-                      type="radio"
-                      name="payment"
-                      id="cod"
-                      value="cod"
-                      checked={paymentMethod === "cod"}
-                      onChange={() => setPaymentMethod("cod")}
-                    />
-                    <label className="form-check-label" htmlFor="cod">
-                      Cash on Delivery
-                    </label>
-                  </div>
-                  <div className="form-check mb-3">
-                    <input
-                      className="form-check-input"
-                      type="radio"
-                      name="payment"
-                      id="cdm"
-                      value="cdm"
-                      checked={paymentMethod === "cdm"}
-                      onChange={() => setPaymentMethod("cdm")}
-                    />
-                    <label className="form-check-label" htmlFor="cdm">
-                      CDM Deposit
-                    </label>
-                  </div>
-
-                  {paymentMethod === "cdm" && (
-                    <div className="cdm-details p-3 rounded-3 bg-light border mt-3">
-                      <h6 className="fw-bold mb-3 text-uppercase">Bank Deposit Details</h6>
-                      <ul className="list-unstyled mb-3">
-                        <li><strong>Bank Name:</strong> Commercial Bank of Ceylon PLC</li>
-                        <li><strong>Branch:</strong> Kiribathgoda Branch</li>
-                        <li><strong>Account Name:</strong> S.N. Collection</li>
-                        <li><strong>Account Number:</strong> 9040088562</li>
-                      </ul>
-
-                      <div className="mb-3">
-                        <label className="form-label fw-semibold">
-                          Upload Payment Slip (Image or PDF)
-                        </label>
-                        <input
-                          type="file"
-                          className="form-control"
-                          accept="image/*,.pdf"
-                          onChange={(e) => setFile(e.target.files[0])}
-                          required
-                        />
-                      </div>
-                      <p className="small text-muted">
-                        After uploading, your payment slip will be sent to our email and WhatsApp for confirmation.
-                      </p>
-                    </div>
-                  )}
-                </div>
-
-                <button
-                  type="submit"
-                  className="btn btn-dark w-100 mt-4 py-3 fw-semibold rounded-pill"
-                  disabled={sending}
+            <div className="info-item mb-3 d-flex align-items-center">
+              <FaEnvelope size={22} className="me-3 text-light" />
+              <div>
+                <p className="mb-0 fw-semibold">Email</p>
+                <a
+                  href="mailto:sncollection230@gmail.com"
+                  className="text-white text-decoration-none"
                 >
-                  {sending ? "Processing..." : "Place Order"}
-                </button>
-              </form>
+                  sncollection230@gmail.com
+                </a>
+              </div>
             </div>
+
+            <div className="info-item mb-3 d-flex align-items-center">
+              <FaPhoneAlt size={20} className="me-3 text-light" />
+              <div>
+                <p className="mb-0 fw-semibold">Phone</p>
+                <a
+                  href="tel:+94776879778"
+                  className="text-white text-decoration-none"
+                >
+                  +94 776 879 778
+                </a>
+              </div>
+            </div>
+
+            <div className="social-links mt-4 d-flex justify-content-center gap-4">
+              <a
+                href="https://www.instagram.com/sncollection230"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white fs-4"
+              >
+                <FaInstagram />
+              </a>
+              <a
+                href="https://www.facebook.com/profile.php?id=100063859521801"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white fs-4"
+              >
+                <FaFacebook />
+              </a>
+            </div>
+
+            <p className="mt-4 small text-center text-secondary">
+              We'd love to hear from you — reach out with any questions or feedback.
+            </p>
           </div>
 
-          {/* Right: Order Summary */}
-          <div className="col-lg-5">
-            <div className="card border-0 shadow-sm p-4 rounded-4">
-              <h5 className="fw-semibold mb-4">Order Summary</h5>
-              {cartItems.length > 0 ? (
-                <>
-                  <div className="cart-summary">
-                    {cartItems.map((item, index) => (
-                      <div key={index} className="d-flex justify-content-between align-items-center mb-3">
-                        <div className="d-flex align-items-center">
-                          <img
-                            src={item.image}
-                            alt={item.name}
-                            className="rounded-3 me-3"
-                            style={{ width: "60px", height: "60px", objectFit: "cover" }}
-                          />
-                          <div>
-                            <p className="mb-0 fw-semibold small">{item.name}</p>
-                            <small className="text-muted">
-                              {item.size} / {item.color}
-                            </small>
-                          </div>
-                        </div>
-                        <p className="fw-semibold mb-0 small">x{item.quantity}</p>
-                      </div>
-                    ))}
-                  </div>
-
-                  <hr />
-                  <div className="d-flex justify-content-between">
-                    <p className="text-muted mb-1">Subtotal</p>
-                    <p className="fw-semibold mb-1">LKR {subtotal.toLocaleString()}</p>
-                  </div>
-                  <div className="d-flex justify-content-between">
-                    <p className="text-muted mb-1">Shipping</p>
-                    <p className="fw-semibold mb-1">
-                      {shipping === 0 ? "Free" : `LKR ${shipping}`}
-                    </p>
-                  </div>
-                  <hr />
-                  <div className="d-flex justify-content-between">
-                    <h6 className="fw-bold text-uppercase mb-0">Total</h6>
-                    <h6 className="fw-bold mb-0 text-dark">
-                      LKR {total.toLocaleString()}
-                    </h6>
-                  </div>
-                </>
-              ) : (
-                <p className="text-muted">Your cart is empty.</p>
-              )}
-            </div>
+          {/* Contact Form */}
+          <div className="col-md-7">
+            <h3 className="fw-bold mb-4 text-uppercase text-center">
+              Send Us a Message
+            </h3>
+            <form onSubmit={handleSubmit}>
+              <div className="mb-3">
+                <label htmlFor="name" className="form-label fw-semibold">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  className="form-control rounded-3"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="email" className="form-label fw-semibold">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  className="form-control rounded-3"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="message" className="form-label fw-semibold">
+                  Message
+                </label>
+                <textarea
+                  className="form-control rounded-3"
+                  id="message"
+                  name="message"
+                  rows="5"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                ></textarea>
+              </div>
+              <div className="text-center">
+                <button
+                  type="submit"
+                  className="btn btn-dark px-5 py-2 rounded-3 fw-semibold"
+                  disabled={isSending}
+                >
+                  {isSending ? "Sending..." : "Send Message"}
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -265,4 +165,4 @@ const CheckoutPage = () => {
   );
 };
 
-export default CheckoutPage;
+export default ContactUsPage;
