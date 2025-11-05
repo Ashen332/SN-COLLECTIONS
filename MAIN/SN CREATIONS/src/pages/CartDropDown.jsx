@@ -17,7 +17,7 @@ const CartDropdown = ({ show, onClose }) => {
     <div className={`cart-dropdown ${show ? "show" : ""}`}>
       <div className="cart-header d-flex justify-content-between align-items-center">
         <h6 className="fw-bold text-uppercase mb-0">Your Cart</h6>
-        <button className="btn-close" onClick={onClose}></button>
+        <button className="btn-close shadow-none" onClick={onClose}></button>
       </div>
 
       <div className="cart-body">
@@ -25,30 +25,28 @@ const CartDropdown = ({ show, onClose }) => {
           cartItems.map((item, index) => (
             <div
               key={index}
-              className="cart-item d-flex align-items-center mb-3"
+              className="cart-item d-flex align-items-center mb-3 border-bottom pb-2"
             >
               <img
                 src={item.image}
                 alt={item.name}
-                className="cart-item-img rounded-3 shadow-sm"
+                className="cart-item-img rounded-4 shadow-sm"
               />
               <div className="cart-item-info ms-3 flex-grow-1">
                 <h6 className="fw-semibold mb-1 text-truncate">
                   {item.name}
                 </h6>
-                <small className="text-muted">
+                <small className="text-muted d-block">
                   {item.size} / {item.color}
                 </small>
-                <p className="mb-0 text-dark fw-semibold">
+                <p className="mb-0 text-dark fw-semibold small">
                   LKR {item.price.toLocaleString()} × {item.quantity}
                 </p>
               </div>
             </div>
           ))
         ) : (
-          <p className="text-center text-muted mt-4">
-            Your cart is empty.
-          </p>
+          <p className="text-center text-muted mt-4">Your cart is empty.</p>
         )}
       </div>
 
@@ -65,8 +63,8 @@ const CartDropdown = ({ show, onClose }) => {
             <div className="d-flex justify-content-center gap-3">
               <Link
                 to="/checkout"
-                className="btn btn-dark rounded-pill px-4"
-                onClick={onClose} // ✅ close dropdown when navigating
+                className="btn btn-dark rounded-pill px-4 py-2 shadow-sm"
+                onClick={onClose}
               >
                 Checkout →
               </Link>

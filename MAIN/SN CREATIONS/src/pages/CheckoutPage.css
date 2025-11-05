@@ -1,20 +1,36 @@
 .checkout-wrapper {
-  background-color: #f8f9fa;
+  background: #f8f9fa;
   min-height: 100vh;
+  font-family: "Poppins", sans-serif;
 }
 
 .card {
-  border-radius: 20px;
+  border-radius: 18px;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
 }
 
 input.form-control {
   border-radius: 10px;
   padding: 10px 12px;
+  border: 1px solid #ddd;
+  transition: all 0.2s ease;
+}
+
+input.form-control:focus {
+  border-color: #000;
+  box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1);
 }
 
 .btn-dark {
-  letter-spacing: 0.5px;
-  transition: all 0.3s ease;
+  letter-spacing: 0.6px;
+  transition: all 0.3s ease-in-out;
+  background-color: #111;
+  border: none;
 }
 
 .btn-dark:hover {
@@ -22,12 +38,31 @@ input.form-control {
   transform: translateY(-2px);
 }
 
-.cart-summary img {
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+.cdm-box {
+  background-color: #fefefe !important;
+  border: 1px solid #eee;
+  border-radius: 16px;
+}
+
+.cdm-box h6 {
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+}
+
+.list-unstyled li {
+  margin-bottom: 4px;
+}
+
+hr {
+  opacity: 0.2;
 }
 
 @media (max-width: 768px) {
   .checkout-wrapper {
-    padding: 30px 0;
+    padding: 20px 0;
+  }
+
+  .card {
+    padding: 1.5rem !important;
   }
 }

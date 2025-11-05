@@ -89,6 +89,7 @@ const AllTopsPage = () => {
         <p className="text-muted mb-0">
           Discover our latest selection of elegant and trendy tops for every occasion.
         </p>
+        <div className="underline mx-auto mt-3"></div>
       </div>
 
       {/* Products */}
@@ -118,12 +119,6 @@ const AllTopsPage = () => {
                           src={img}
                           className="d-block w-100 img-fluid product-img"
                           alt={`${top.name} ${imgIndex + 1}`}
-                          style={{
-                            objectFit: "cover",
-                            borderRadius: "15px 15px 0 0",
-                            height: "auto",
-                            maxHeight: "480px",
-                          }}
                         />
                       </div>
                     ))}

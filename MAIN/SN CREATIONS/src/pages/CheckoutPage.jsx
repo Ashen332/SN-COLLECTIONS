@@ -72,48 +72,87 @@ const CheckoutPage = () => {
   };
 
   return (
-    <div className="checkout-wrapper py-5 bg-light">
+    <div className="checkout-wrapper py-5">
       <div className="container">
-        <h2 className="fw-bold text-uppercase mb-5 text-center">Checkout</h2>
+        <h2 className="fw-bold text-uppercase mb-5 text-center display-6 tracking-wide">
+          Checkout
+        </h2>
         <div className="row g-5">
-          {/* LEFT: Billing Form */}
+          {/* LEFT: Billing Details */}
           <div className="col-lg-7">
-            <div className="card border-0 shadow-sm p-4 rounded-4">
-              <h5 className="fw-semibold mb-4">Billing Details</h5>
+            <div className="card border-0 shadow-lg p-4 rounded-4">
+              <h5 className="fw-semibold mb-4 text-dark">Billing Details</h5>
               <form onSubmit={handlePlaceOrder}>
                 <div className="row g-3">
                   <div className="col-md-6">
                     <label className="form-label fw-semibold">First Name</label>
-                    <input name="firstName" type="text" className="form-control" required />
+                    <input
+                      name="firstName"
+                      type="text"
+                      className="form-control"
+                      required
+                    />
                   </div>
                   <div className="col-md-6">
                     <label className="form-label fw-semibold">Last Name</label>
-                    <input name="lastName" type="text" className="form-control" required />
+                    <input
+                      name="lastName"
+                      type="text"
+                      className="form-control"
+                      required
+                    />
                   </div>
-                  <div className="col-md-12">
+                  <div className="col-12">
                     <label className="form-label fw-semibold">Email</label>
-                    <input name="email" type="email" className="form-control" required />
+                    <input
+                      name="email"
+                      type="email"
+                      className="form-control"
+                      required
+                    />
                   </div>
-                  <div className="col-md-12">
+                  <div className="col-12">
                     <label className="form-label fw-semibold">Address</label>
-                    <input name="address" type="text" className="form-control" required />
+                    <input
+                      name="address"
+                      type="text"
+                      className="form-control"
+                      required
+                    />
                   </div>
                   <div className="col-md-6">
                     <label className="form-label fw-semibold">City</label>
-                    <input name="city" type="text" className="form-control" required />
+                    <input
+                      name="city"
+                      type="text"
+                      className="form-control"
+                      required
+                    />
                   </div>
                   <div className="col-md-6">
-                    <label className="form-label fw-semibold">Postal Code</label>
-                    <input name="postal" type="text" className="form-control" required />
+                    <label className="form-label fw-semibold">
+                      Postal Code
+                    </label>
+                    <input
+                      name="postal"
+                      type="text"
+                      className="form-control"
+                      required
+                    />
                   </div>
-                  <div className="col-md-12">
+                  <div className="col-12">
                     <label className="form-label fw-semibold">Phone</label>
-                    <input name="phone" type="text" className="form-control" required />
+                    <input
+                      name="phone"
+                      type="text"
+                      className="form-control"
+                      required
+                    />
                   </div>
                 </div>
 
                 <div className="mt-4">
-                  <h6 className="fw-semibold mb-2">Payment Method</h6>
+                  <h6 className="fw-semibold mb-3">Payment Method</h6>
 
                   <div className="form-check mb-2">
                     <input
@@ -129,7 +168,7 @@ const CheckoutPage = () => {
                     </label>
                   </div>
 
-                  <div className="form-check mb-3">
+                  <div className="form-check">
                     <input
                       className="form-check-input"
                       type="radio"
@@ -144,13 +183,23 @@ const CheckoutPage = () => {
                   </div>
 
                   {paymentMethod === "cdm" && (
-                    <div className="cdm-box p-3 bg-light border rounded-3 mt-3">
-                      <h6 className="fw-bold mb-3 text-uppercase">Bank Details</h6>
+                    <div className="cdm-box p-4 bg-light border rounded-4 mt-3">
+                      <h6 className="fw-bold mb-3 text-uppercase text-dark">
+                        Bank Details
+                      </h6>
                       <ul className="list-unstyled small mb-3">
-                        <li><strong>Bank:</strong> S @ N Collections Pvt Ltd</li>
-                        <li><strong>Branch:</strong> 035020682299-S/A</li>
-                        <li><strong>Account Name:</strong> S.N. Collection</li>
-                        <li><strong>Account No:</strong> 035010048841-C/A</li>
+                        <li>
+                          <strong>Bank:</strong> S @ N Collections Pvt Ltd
+                        </li>
+                        <li>
+                          <strong>Branch:</strong> 035020682299-S/A
+                        </li>
+                        <li>
+                          <strong>Account Name:</strong> S.N. Collection
+                        </li>
+                        <li>
+                          <strong>Account No:</strong> 035010048841-C/A
+                        </li>
                       </ul>
 
                       <label className="form-label fw-semibold">
@@ -164,7 +213,7 @@ const CheckoutPage = () => {
                         required
                       />
                       <small className="text-muted">
-                        Please upload your payment slip to confirm deposit.
+                        Please upload your payment slip to confirm your deposit.
                       </small>
                     </div>
                   )}
@@ -172,7 +221,7 @@ const CheckoutPage = () => {
 
                 <button
                   type="submit"
-                  className="btn btn-dark w-100 mt-4 py-3 fw-semibold rounded-pill"
+                  className="btn btn-dark w-100 mt-4 py-3 fw-semibold rounded-pill shadow-sm"
                   disabled={sending}
                 >
                   {sending ? "Processing..." : "Place Order"}
@@ -181,27 +230,38 @@ const CheckoutPage = () => {
             </div>
           </div>
 
-          {/* RIGHT: Summary */}
+          {/* RIGHT: Order Summary */}
           <div className="col-lg-5">
-            <div className="card border-0 shadow-sm p-4 rounded-4">
-              <h5 className="fw-semibold mb-4">Order Summary</h5>
+            <div className="card border-0 shadow-lg p-4 rounded-4">
+              <h5 className="fw-semibold mb-4 text-dark">Order Summary</h5>
               {cartItems.length > 0 ? (
                 <>
                   {cartItems.map((item, i) => (
-                    <div key={i} className="d-flex justify-content-between align-items-center mb-3">
+                    <div
+                      key={i}
+                      className="d-flex justify-content-between align-items-center mb-3 border-bottom pb-2"
+                    >
                       <div className="d-flex align-items-center">
                         <img
                           src={item.image}
                           alt={item.name}
-                          className="rounded-3 me-3"
-                          style={{ width: "60px", height: "60px", objectFit: "cover" }}
+                          className="rounded-3 me-3 shadow-sm"
+                          style={{
+                            width: "65px",
+                            height: "65px",
+                            objectFit: "cover",
+                          }}
                         />
                         <div>
                           <p className="mb-0 fw-semibold small">{item.name}</p>
-                          <small className="text-muted">{item.size} / {item.color}</small>
+                          <small className="text-muted">
+                            {item.size} / {item.color}
+                          </small>
                         </div>
                       </div>
-                      <p className="fw-semibold mb-0 small">x{item.quantity}</p>
+                      <p className="fw-semibold mb-0 small text-secondary">
+                        ×{item.quantity}
+                      </p>
                     </div>
                   ))}
                   <hr />
@@ -214,7 +274,7 @@ const CheckoutPage = () => {
                     <span>{shipping ? `LKR ${shipping}` : "Free"}</span>
                   </div>
                   <hr />
-                  <div className="d-flex justify-content-between fw-bold">
+                  <div className="d-flex justify-content-between fw-bold fs-5">
                     <span>Total</span>
                     <span>LKR {total.toLocaleString()}</span>
                   </div>
