@@ -1,20 +1,21 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./pages/Navbar";
-import Footer from "./pages/Footer";
-import HomePage from "./pages/HomePage";
-import AllTops from "./pages/AllTopsPage";
-import LongSleeveTops from "./pages/LongSleeveTopsPage";
-import ShortSleeveTops from "./pages/ShortSleeveTopsPage";
-import CropTops from "./pages/CropTopsPage";
-import DressesPage from "./pages/DressesPage";
-import MiniDressesPage from "./pages/MiniDressesPage";
-import MidiDresses from "./pages/MidiDressesPage";
-import MaxiDresses from "./pages/MaxiDressesPage";
-import Contact from "./pages/ContactUsPage";
-import ProductDetailsPage from "./pages/ProductDetailsPage";
-import CheckoutPage from "./pages/CheckoutPage";
-import OrderSuccessPage from "./pages/OrderSuccessPage"; // ✅ added
+import Navbar from "./pages/Navbar.jsx";
+import Footer from "./pages/Footer.jsx";
+import HomePage from "./pages/HomePage.jsx";
+import AllTops from "./pages/AllTopsPage.jsx";
+import LongSleeveTops from "./pages/LongSleeveTopsPage.jsx";
+import ShortSleeveTops from "./pages/ShortSleeveTopsPage.jsx";
+import CropTops from "./pages/CropTopsPage.jsx";
+import DressesPage from "./pages/DressesPage.jsx";
+import MiniDressesPage from "./pages/MiniDressesPage.jsx";
+import MidiDresses from "./pages/MidiDressesPage.jsx";
+import MaxiDresses from "./pages/MaxiDressesPage.jsx";
+import Contact from "./pages/ContactUsPage.jsx";
+import ProductDetailsPage from "./pages/ProductDetailsPage.jsx";
+import CheckoutPage from "./pages/CheckoutPage.jsx";
+import OrderSuccessPage from "./pages/OrderSuccessPage.jsx";
+ // ✅ added
 
 function App() {
   return (
