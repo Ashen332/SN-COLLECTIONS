@@ -59,7 +59,7 @@ const DressesPage = () => {
   const allDresses = [
     {
       name: "Cami Tiered Mini Dress",
-      price: "3,490",
+      price: "2,350",
       images: [DSC00660, DSC00687, DSC00727, DSC00735],
       colors: "White",
       material: "Cotton Blend",
@@ -68,7 +68,7 @@ const DressesPage = () => {
     },
     {
       name: "Twist Front Cami Dress",
-      price: "3,890",
+      price: "1,990",
       images: [DSC00230, DSC00264, DSC00280, DSC00284],
       colors: "Beige",
       material: "Polyester",

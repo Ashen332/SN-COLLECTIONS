@@ -30,7 +30,7 @@ const AllTopsPage = () => {
   const allTops = [
     {
       name: "Knot Tie Crop Top",
-      price: "3,490",
+      price: "1,990",
       images: [DSC00123, DSC00140, DSC00151, DSC00159],
       colors: "White, Beige",
       material: "Cotton Blend",
@@ -39,7 +39,7 @@ const AllTopsPage = () => {
     },
     {
       name: "Summer Belly Sleeve",
-      price: "3,990",
+      price: "1,750",
       images: [DSC00187, DSC00203, DSC00206, DSC00228],
       colors: "Light Blue, White",
       material: "Linen",
@@ -48,7 +48,7 @@ const AllTopsPage = () => {
     },
     {
       name: "Shoulder Black Crop Top",
-      price: "2,990",
+      price: "1,350",
       images: [DSC09965, DSC09972, DSC09982, DSC09988],
       colors: "Black",
       material: "Polyester",
@@ -57,7 +57,7 @@ const AllTopsPage = () => {
     },
     {
       name: "One Shoulder Crop Top",
-      price: "3,790",
+      price: "1,290",
       images: [DSC00047, DSC00052, DSC00055, DSC00059, DSC00077],
       colors: "Black, Red",
       material: "Cotton Blend",
@@ -66,7 +66,7 @@ const AllTopsPage = () => {
     },
     {
       name: "Neck Top Valerie",
-      price: "3,250",
+      price: "1,350",
       images: [DSC09994, DSC09997, DSC09998],
       colors: "Cream",
       material: "Rayon",
