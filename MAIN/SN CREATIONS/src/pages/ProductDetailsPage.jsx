@@ -85,7 +85,6 @@ const ProductDetailsPage = () => {
     if (modalInstance) modalInstance.hide();
   };
 
-  // ✅ Dress and Crop Top Data
   const dressSizes = [
     ["XS", 13.5, 30, 26, 34, 35.5, 53],
     ["S", 14, 32, 28, 36, 35.5, 53],
@@ -110,9 +109,9 @@ const ProductDetailsPage = () => {
 
   return (
     <div className="product-details-wrapper bg-white">
-      <div className="container product-details-container">
+      <div className="container product-details-container py-5">
         <div className="row align-items-start">
-          {/* Left — Images */}
+          {/* LEFT SIDE — IMAGES */}
           <div className="col-md-6 text-center">
             <img
               src={mainImage}
@@ -129,26 +128,19 @@ const ProductDetailsPage = () => {
                     mainImage === img ? "border border-dark border-2" : "border"
                   }`}
                   onClick={() => setMainImage(img)}
-                  style={{
-                    width: "75px",
-                    height: "75px",
-                    objectFit: "cover",
-                    cursor: "pointer",
-                  }}
                 />
               ))}
             </div>
           </div>
 
-          {/* Right — Product Details */}
-          <div className="col-md-6">
+          {/* RIGHT SIDE — DETAILS */}
+          <div className="col-md-6 mt-4 mt-md-0">
             <h2 className="fw-bold text-uppercase mb-3">{product.name}</h2>
-            <hr />
             <p className="price fs-4 text-dark fw-semibold">
               LKR {product.price}
             </p>
 
-            <div className="detail-info small">
+            <div className="detail-info mb-4">
               <p>
                 <strong>Colors:</strong> {product.colors}
               </p>
@@ -163,9 +155,9 @@ const ProductDetailsPage = () => {
               </p>
             </div>
 
-            {/* Sizes */}
-            <div className="size-section mt-4">
-              <p className="mb-1 fw-semibold">Available Sizes</p>
+            {/* SIZE */}
+            <div className="size-section mb-4">
+              <p className="mb-2 fw-semibold">Available Sizes</p>
               <div className="d-flex gap-2 flex-wrap">
                 {["XS", "S", "M", "L", "XL", "2XL"].map((size) => (
                   <button
@@ -181,8 +173,7 @@ const ProductDetailsPage = () => {
               </div>
 
               <p
-                className="mt-3 text-decoration-underline text-dark fw-semibold"
-                style={{ cursor: "pointer" }}
+                className="mt-3 size-chart-link"
                 data-bs-toggle="modal"
                 data-bs-target="#sizeChartModal"
               >
@@ -190,17 +181,12 @@ const ProductDetailsPage = () => {
               </p>
 
               {error && (
-                <div
-                  className="text-danger mt-2 fw-medium"
-                  style={{ fontSize: "0.9rem" }}
-                >
-                  {error}
-                </div>
+                <div className="text-danger mt-2 fw-medium small">{error}</div>
               )}
             </div>
 
-            {/* Quantity */}
-            <div className="quantity mt-4 d-flex align-items-center gap-3">
+            {/* QUANTITY */}
+            <div className="quantity d-flex align-items-center gap-3 mb-4">
               <button
                 className="btn btn-outline-dark rounded-circle"
                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
@@ -216,9 +202,9 @@ const ProductDetailsPage = () => {
               </button>
             </div>
 
-            {/* Add to Cart */}
+            {/* ADD TO CART */}
             <button
-              className="btn btn-dark w-100 mt-4 py-3"
+              className="btn btn-dark w-100 py-3 rounded-3 fw-semibold"
               onClick={handleAddToCart}
             >
               🛒 ADD TO CART
@@ -227,18 +213,19 @@ const ProductDetailsPage = () => {
         </div>
       </div>
 
-      {/* ✅ Size Chart Modal */}
+      {/* ✅ ORDER SUMMARY MODAL */}
       <div
         className="modal fade"
-        id="sizeChartModal"
+        ref={modalRef}
+        id="orderSummaryModal"
         tabIndex="-1"
         aria-hidden="true"
       >
-        <div className="modal-dialog modal-lg modal-dialog-centered">
-          <div className="modal-content border-0 rounded-4 shadow-lg">
-            <div className="modal-header border-0">
+        <div className="modal-dialog modal-dialog-centered modal-md">
+          <div className="modal-content shadow-lg border-0 rounded-4">
+            <div className="modal-header border-0 pb-0">
               <h5 className="modal-title fw-bold text-uppercase">
-                Size Guide
+                Order Summary
               </h5>
               <button
                 type="button"
@@ -248,75 +235,99 @@ const ProductDetailsPage = () => {
               ></button>
             </div>
 
-            <div className="modal-body">
-              <div className="size-guide-intro mb-4">
-                <p className="text-muted small">
-                  We design our garments to align with the measurements listed
-                  below. Use this guide to find your best fit based on{" "}
-                  <strong>
-                    Shoulder, Bust, Waist, Hip, Knee Length, and Anchor Length.
-                  </strong>{" "}
-                  Actual fit may vary slightly depending on the fabric and
-                  design style.
-                </p>
-                <ul className="text-muted small ps-3">
-                  <li>
-                    <strong>SHOULDER:</strong> Measure straight across from one
-                    shoulder tip to the other.
-                  </li>
-                  <li>
-                    <strong>BUST:</strong> Measure around the fullest part of
-                    your chest, keeping the tape parallel to the floor.
-                  </li>
-                  <li>
-                    <strong>WAIST:</strong> Measure around the narrowest part of
-                    your waistline.
-                  </li>
-                  <li>
-                    <strong>HIP:</strong> Measure around the widest part of your
-                    hips, about 8 inches below your waist.
-                  </li>
-                  <li>
-                    <strong>KNEE LENGTH:</strong> Measure vertically from the
-                    waist to the middle of the knee.
-                  </li>
-                  <li>
-                    <strong>ANCHOR LENGTH:</strong> Measure vertically from the
-                    shoulder down to the garment’s full length.
-                  </li>
-                </ul>
-              </div>
+            <div className="modal-body text-center py-4">
+              <img
+                src={product.images[0]}
+                alt={product.name}
+                className="order-modal-img rounded mb-3"
+              />
+              <h6 className="fw-bold text-uppercase mb-2">{product.name}</h6>
+              <p className="text-muted small mb-1">
+                <strong>Size:</strong> {selectedSize}
+              </p>
+              <p className="text-muted small mb-1">
+                <strong>Quantity:</strong> {quantity}
+              </p>
+              <p className="text-dark fw-semibold mt-3 fs-5">
+                Total: LKR {total.toLocaleString()}
+              </p>
+            </div>
 
+            <div className="modal-footer border-0 d-flex justify-content-center gap-3 pb-4">
+              <button
+                type="button"
+                className="btn btn-outline-dark rounded-pill px-4"
+                data-bs-dismiss="modal"
+                onClick={closeModal}
+              >
+                Continue Shopping
+              </button>
+              <button
+                type="button"
+                className="btn btn-dark rounded-pill px-4"
+                onClick={() => {
+                  closeModal();
+                  navigate("/checkout");
+                }}
+              >
+                Checkout →
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ✅ SIZE CHART MODAL */}
+      <div
+        className="modal fade"
+        id="sizeChartModal"
+        tabIndex="-1"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-lg modal-dialog-centered">
+          <div className="modal-content border-0 rounded-4 shadow-lg">
+            <div className="modal-header border-0 pb-0">
+              <h5 className="modal-title fw-bold text-uppercase">Size Guide</h5>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+              ></button>
+            </div>
+            <div className="modal-body">
+              <p className="text-muted small mb-4">
+                Use this chart to find your best fit. Measurements are in inches.
+              </p>
               <div className="table-responsive">
-                <table className="table table-striped align-middle text-center">
+                <table className="table table-striped text-center align-middle">
                   <thead className="table-dark">
                     <tr>
                       {isCropTop ? (
                         <>
                           <th>Size</th>
-                          <th>Shoulder (in)</th>
-                          <th>Bust (in)</th>
-                          <th>Waist (in)</th>
-                          <th>Top Length (in)</th>
+                          <th>Shoulder</th>
+                          <th>Bust</th>
+                          <th>Waist</th>
+                          <th>Top Length</th>
                         </>
                       ) : (
                         <>
                           <th>Size</th>
-                          <th>Shoulder (in)</th>
-                          <th>Bust (in)</th>
-                          <th>Waist (in)</th>
-                          <th>Hip (in)</th>
-                          <th>Knee Length (in)</th>
-                          <th>Anchor Length (in)</th>
+                          <th>Shoulder</th>
+                          <th>Bust</th>
+                          <th>Waist</th>
+                          <th>Hip</th>
+                          <th>Knee</th>
+                          <th>Length</th>
                         </>
                       )}
                     </tr>
                   </thead>
                   <tbody>
-                    {(isCropTop ? cropSizes : dressSizes).map((row, index) => (
-                      <tr key={index}>
-                        {row.map((cell, i) => (
-                          <td key={i}>{cell}</td>
+                    {(isCropTop ? cropSizes : dressSizes).map((row, i) => (
+                      <tr key={i}>
+                        {row.map((cell, j) => (
+                          <td key={j}>{cell}</td>
                         ))}
                       </tr>
                     ))}
