@@ -4,7 +4,7 @@ import { Navbar as RBNavbar, Nav, NavDropdown, Container } from "react-bootstrap
 import { ShoppingBag } from "lucide-react";
 import CartDropdown from "./CartDropdown";
 
-const Navbar = () => {
+const NavBar = () => {
   const [showCart, setShowCart] = useState(false);
   const [cartQuantity, setCartQuantity] = useState(0);
 
@@ -76,4 +76,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default NavBar;
