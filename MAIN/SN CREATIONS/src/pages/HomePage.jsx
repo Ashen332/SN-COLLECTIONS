@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./HomePage.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import Navbar from "./Navbar";
+import NavBar from "./NavBar";
 
 // Hero images
 import img1 from "../assets/1.png";
@@ -65,7 +65,7 @@ const HomePage = () => {
           scrolled ? "navbar-scrolled" : "navbar-transparent"
         }`}
       >
-       <Navbar/>
+       <NavBar/>
       </nav>
 
       {/* ===== Hero Section ===== */}
