@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Navbar as RBNavbar, Nav, NavDropdown, Container } from "react-bootstrap";
 import { ShoppingBag } from "lucide-react";
-import CartDropdown from "./CartDropdown";
+import CartDropdown from "./CartDropDown";
 
 const NavBar = () => {
   const [showCart, setShowCart] = useState(false);
