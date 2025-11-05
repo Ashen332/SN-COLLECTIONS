@@ -1,0 +1,33 @@
+.checkout-wrapper {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.card {
+  border-radius: 20px;
+}
+
+input.form-control {
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.btn-dark {
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.btn-dark:hover {
+  background-color: #000;
+  transform: translateY(-2px);
+}
+
+.cart-summary img {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .checkout-wrapper {
+    padding: 30px 0;
+  }
+}
