@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./CartDropdown.css";
+import "./CartDropDown.css";
 
 const CartDropdown = ({ show, onClose }) => {
   const [cartItems, setCartItems] = useState([]);
