@@ -837,3 +837,39 @@ html {
     padding: 0.45rem;
   }
 }
+/* ==============================
+   COLOR SELECTOR STYLING
+   ============================== */
+.color-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.color-circle:hover {
+  transform: scale(1.1);
+  border-color: #000;
+}
+
+.color-circle.selected {
+  border: 2px solid #000;
+  box-shadow: 0 0 0 2px #00000020;
+}
+
+/* ==============================
+   SIZE CHART LINK FIX
+   ============================== */
+.size-chart-link {
+  color: #000;
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.size-chart-link:hover {
+  color: #555;
+}

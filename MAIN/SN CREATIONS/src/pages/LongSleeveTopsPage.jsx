@@ -19,22 +19,22 @@ const LongSleeveTopsPage = () => {
   // ✅ Product data
   const longSleeveTops = [
     {
-      name: "Knot Tie Crop Top",
-      price: "3,490",
-      images: [DSC00123, DSC00140, DSC00151, DSC00159],
-      colors: "White, Beige",
-      material: "Cotton Blend",
-      size: "UK08",
-      height: "5'8\"",
+       name: "Knot Tie Crop Top",
+            price: "1,990",
+            images: [DSC00123, DSC00140, DSC00151, DSC00159],
+            colors: "Pink, Beige",
+            material: "Viscose rayon",
+            size: "UK10",
+            height: "5'5\"",
     },
     {
       name: "Summer Belly Sleeve",
-      price: "3,990",
-      images: [DSC00187, DSC00203, DSC00206, DSC00228],
-      colors: "Light Blue, White",
-      material: "Linen",
-      size: "UK10",
-      height: "5'7\"",
+           price: "1,750",
+           images: [DSC00187, DSC00203, DSC00206, DSC00228],
+           colors: "White",
+           material: "Cotton Elastene",
+           size: "UK10",
+           height: "5'6\"",
     },
   ];
 

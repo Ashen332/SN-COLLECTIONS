@@ -10,6 +10,7 @@ const ProductDetailsPage = () => {
 
   const [mainImage, setMainImage] = useState(product?.images?.[0]);
   const [selectedSize, setSelectedSize] = useState("");
+  const [selectedColor, setSelectedColor] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [total, setTotal] = useState(0);
   const [error, setError] = useState("");
@@ -64,10 +65,10 @@ const ProductDetailsPage = () => {
       name: product.name,
       price: numericPrice,
       size: selectedSize,
+      color: selectedColor || product.colors.split(",")[0].trim(),
       quantity,
       total: totalAmount,
       image: product.images[0],
-      color: product.colors,
     };
     cart.push(newItem);
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -142,9 +143,6 @@ const ProductDetailsPage = () => {
 
             <div className="detail-info mb-4">
               <p>
-                <strong>Colors:</strong> {product.colors}
-              </p>
-              <p>
                 <strong>Material:</strong> {product.material}
               </p>
               <p>
@@ -155,7 +153,27 @@ const ProductDetailsPage = () => {
               </p>
             </div>
 
-            {/* SIZE */}
+            {/* ✅ COLORS */}
+            <div className="color-section mb-4">
+              <p className="mb-2 fw-semibold">Available Colors</p>
+              <div className="d-flex gap-2 flex-wrap">
+                {product.colors.split(",").map((color, index) => (
+                  <div
+                    key={index}
+                    title={color.trim()}
+                    onClick={() => setSelectedColor(color.trim())}
+                    className={`color-circle ${
+                      selectedColor === color.trim() ? "selected" : ""
+                    }`}
+                    style={{
+                      backgroundColor: color.trim().toLowerCase(),
+                    }}
+                  ></div>
+                ))}
+              </div>
+            </div>
+
+            {/* ✅ SIZES */}
             <div className="size-section mb-4">
               <p className="mb-2 fw-semibold">Available Sizes</p>
               <div className="d-flex gap-2 flex-wrap">
@@ -172,13 +190,14 @@ const ProductDetailsPage = () => {
                 ))}
               </div>
 
-              <p
-                className="mt-3 size-chart-link"
+              <span
+                className="mt-3 d-inline-block size-chart-link"
+                role="button"
                 data-bs-toggle="modal"
                 data-bs-target="#sizeChartModal"
               >
                 (Size Chart)
-              </p>
+              </span>
 
               {error && (
                 <div className="text-danger mt-2 fw-medium small">{error}</div>
@@ -242,6 +261,10 @@ const ProductDetailsPage = () => {
                 className="order-modal-img rounded mb-3"
               />
               <h6 className="fw-bold text-uppercase mb-2">{product.name}</h6>
+              <p className="text-muted small mb-1">
+                <strong>Color:</strong>{" "}
+                {selectedColor || product.colors.split(",")[0]}
+              </p>
               <p className="text-muted small mb-1">
                 <strong>Size:</strong> {selectedSize}
               </p>

@@ -16,12 +16,12 @@ const ShortSleeveTopsPage = () => {
   const shortSleeveTops = [
     {
       name: "Shoulder Black Crop Top",
-      price: "1,350",
-      colors: "Black and Blue",
-      material: "Mesh Knit",
-      size: "10",
-      height: "5’6”",
-      images: [DSC09965, DSC09972, DSC09982, DSC09988],
+            price: "1,350",
+            images: [DSC09965, DSC09972, DSC09982, DSC09988],
+            colors: "Black,Blue",
+            material: "Polyester",
+            size: "UK10",
+            height: "5'6\"",
     },
   ];
 

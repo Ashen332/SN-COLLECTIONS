@@ -1,107 +1,36 @@
 /* ================================================
-   GLOBAL STYLES — SN Collection
-   Elegant black/white theme with gold accents
+   CONTACT PAGE — Premium SN Collection Styling
    ================================================ */
 
 :root {
-  --brand-black: #000;
-  --brand-white: #fff;
-  --brand-gray: #f8f8f8;
-  --brand-gold: #ffce00;
+  --black: #000;
+  --white: #fff;
+  --gray: #f8f8f8;
+  --gold: #d4af37;
   --text-dark: #111;
   --text-muted: #777;
+  --radius: 16px;
   --transition: all 0.3s ease;
-  --radius-lg: 20px;
-  --radius-md: 12px;
+  --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
-body {
-  font-family: "Poppins", sans-serif;
-  background-color: var(--brand-white);
-  color: var(--text-dark);
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  scroll-behavior: smooth;
-}
-
-#root {
-  flex: 1;
-}
-
-/* ================================================
-   UNIVERSAL ELEMENTS
-   ================================================ */
-
-.card {
-  border: none !important;
-  border-radius: var(--radius-lg) !important;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-  transition: var(--transition);
-  background-color: var(--brand-white);
-}
-
-.card:hover {
-  transform: translateY(-3px);
-}
-
-.form-control {
-  border: 1px solid #ddd;
-  padding: 10px 12px;
-  border-radius: var(--radius-md);
-  transition: var(--transition);
-}
-
-.form-control:focus {
-  border-color: var(--brand-black);
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
-}
-
-.btn-dark {
-  background-color: var(--brand-black) !important;
-  color: var(--brand-white) !important;
-  border-radius: 50px !important;
-  letter-spacing: 0.3px;
-  font-weight: 500;
-  padding: 10px 28px;
-  border: none;
-  transition: var(--transition);
-}
-
-.btn-dark:hover {
-  background-color: #222 !important;
-  transform: translateY(-1px);
-}
-
-.btn-outline-dark {
-  border-radius: 50px !important;
-  font-weight: 500;
-  letter-spacing: 0.3px;
-  transition: var(--transition);
-}
-
-.btn-outline-dark:hover {
-  background-color: var(--brand-black);
-  color: var(--brand-white);
-}
-
-/* ================================================
-   CONTACT PAGE
-   ================================================ */
-
+/* Base Layout */
 .contact-page {
-  background-color: var(--brand-gray);
+  background: linear-gradient(135deg, #fdfdfd, #f7f7f7);
   min-height: 100vh;
-  padding: 100px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 0;
 }
 
 .contact-card {
-  background-color: var(--brand-white);
-  max-width: 1000px;
+  background-color: var(--white);
+  border-radius: 24px;
+  overflow: hidden;
+  max-width: 1050px;
   width: 95%;
-  border-radius: var(--radius-lg);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow);
   transition: var(--transition);
 }
 
@@ -109,113 +38,141 @@ body {
   transform: translateY(-4px);
 }
 
+/* LEFT SECTION — Info Panel */
 .contact-info {
-  background-color: var(--brand-black);
-  color: var(--brand-white);
-  border-radius: var(--radius-lg);
+  background: radial-gradient(circle at top left, #000 50%, #111 100%);
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  border-right: 1px solid #222;
+}
+
+.contact-info h3 {
+  font-size: 1.7rem;
+  letter-spacing: 1px;
+  color: var(--gold);
+}
+
+.contact-info .info-item {
+  transition: var(--transition);
+}
+
+.contact-info .info-item:hover {
+  transform: translateX(5px);
+}
+
+.contact-info a {
+  color: var(--white);
+  opacity: 0.9;
+  transition: var(--transition);
+}
+
+.contact-info a:hover {
+  opacity: 1;
+  color: var(--gold);
+}
+
+.social-links {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
 
 .social-links a {
-  color: var(--brand-white);
   background-color: #222;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  color: var(--gold);
+  width: 45px;
+  height: 45px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  border-radius: 50%;
+  font-size: 1.2rem;
   transition: var(--transition);
 }
 
 .social-links a:hover {
-  background-color: var(--brand-white);
-  color: var(--brand-black);
+  background-color: var(--gold);
+  color: var(--black);
+  transform: scale(1.1);
 }
 
-/* ================================================
-   CHECKOUT PAGE
-   ================================================ */
-
-.checkout-wrapper {
-  background-color: var(--brand-gray);
-  padding: 100px 0;
+/* RIGHT SECTION — Contact Form */
+.contact-card form {
+  margin-top: 10px;
 }
 
-.cdm-details {
-  background: #fafafa;
+.contact-card h3 {
+  font-size: 1.6rem;
+  letter-spacing: 1px;
+  color: var(--text-dark);
+}
+
+.form-control {
   border: 1px solid #ddd;
-  border-radius: var(--radius-md);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  border-radius: var(--radius);
+  padding: 10px 14px;
   transition: var(--transition);
+  background: var(--white);
 }
 
-.cdm-details:hover {
+.form-control:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+}
+
+textarea.form-control {
+  resize: none;
+  line-height: 1.5;
+}
+
+.btn-dark {
+  background-color: var(--black);
+  color: var(--white);
+  border-radius: 50px;
+  padding: 10px 40px;
+  font-weight: 500;
+  transition: var(--transition);
+  border: none;
+}
+
+.btn-dark:hover {
+  background-color: var(--gold);
+  color: var(--black);
   transform: translateY(-2px);
 }
 
-.cdm-details ul {
-  padding-left: 1rem;
-}
-
-.cdm-details li {
+/* Inline alert */
+.alert {
+  border-radius: var(--radius);
   font-size: 0.95rem;
-  color: var(--text-dark);
-  margin-bottom: 5px;
+  margin-bottom: 1rem;
 }
 
-.cdm-details strong {
-  color: var(--brand-black);
+/* Success animation */
+.alert-success {
+  animation: fadeIn 0.5s ease;
 }
 
-.cdm-details input[type="file"] {
-  border-radius: var(--radius-md);
-  background: var(--brand-white);
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* ================================================
-   FOOTER
-   ================================================ */
-
-.footer {
-  background-color: var(--brand-black);
-  color: var(--brand-white);
-  padding-top: 60px;
-  padding-bottom: 20px;
-  margin-top: 0;
-  border-top: 1px solid #222;
-}
-
-.footer a {
-  color: var(--brand-white);
-  text-decoration: none;
-  transition: var(--transition);
-}
-
-.footer a:hover {
-  color: var(--brand-gold);
-}
-
-.footer-bottom {
-  border-top: 1px solid #222;
-  text-align: center;
-  margin-top: 40px;
-  padding-top: 20px;
-  font-size: 0.85rem;
-  color: #aaa;
-}
-
-/* ================================================
-   RESPONSIVE DESIGN
-   ================================================ */
-
-@media (max-width: 768px) {
-  .contact-card,
-  .card {
-    padding: 1.5rem !important;
+/* Responsive */
+@media (max-width: 992px) {
+  .contact-card {
+    flex-direction: column;
   }
-
-  .footer {
-    text-align: left;
-    padding-top: 40px;
+  .contact-info {
+    border-right: none;
+    border-bottom: 1px solid #333;
+    text-align: center;
+  }
+  .social-links {
+    margin-top: 1rem;
   }
 }

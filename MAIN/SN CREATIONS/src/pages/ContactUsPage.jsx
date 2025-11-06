@@ -1,49 +1,56 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FaEnvelope, FaPhoneAlt, FaInstagram, FaFacebook } from "react-icons/fa";
-import emailjs from "emailjs-com";
 import "./ContactUsPage.css";
 
 const ContactUsPage = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [isSending, setIsSending] = useState(false);
+  const [status, setStatus] = useState({ type: "", message: "" }); // ✅ feedback state
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setStatus({ type: "", message: "" }); // reset status on change
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSending(true);
+    setStatus({ type: "", message: "" });
 
-    const serviceID = "service_1jauqqn";
-    const templateID = "template_y1sw6hl";
-    const publicKey = "d2jfBxd_FpaDoKw9M";
-
-    emailjs
-      .send(serviceID, templateID, formData, publicKey)
-      .then(() => {
-        alert(`Thank you ${formData.name}, your message has been sent!`);
-        setFormData({ name: "", email: "", message: "" });
-        setIsSending(false);
-      })
-      .catch((error) => {
-        console.error("Email send error:", error);
-        alert("Something went wrong. Please try again later.");
-        setIsSending(false);
+    try {
+      const res = await fetch("http://localhost:5000/send-contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       });
+
+      const data = await res.json();
+      if (data.success) {
+        setStatus({
+          type: "success",
+          message: `Thanks, ${formData.name}! Your message has been sent.`,
+        });
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        setStatus({ type: "error", message: "Failed to send. Try again later." });
+      }
+    } catch (err) {
+      console.error("Error:", err);
+      setStatus({
+        type: "error",
+        message: "Server error. Please try again later.",
+      });
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
     <div className="contact-page d-flex align-items-center justify-content-center">
       <div className="contact-card shadow-lg rounded-4 overflow-hidden">
         <div className="row g-0">
-          {/* Left Section — Contact Info */}
+          {/* Left — Info */}
           <div className="col-md-5 bg-dark text-white p-5 contact-info">
             <h3 className="fw-bold mb-4 text-uppercase text-center">Get in Touch</h3>
 
@@ -64,10 +71,7 @@ const ContactUsPage = () => {
               <FaPhoneAlt size={20} className="me-3 text-light mt-1" />
               <div>
                 <p className="mb-1 fw-semibold">Phone</p>
-                <a
-                  href="tel:+94776879778"
-                  className="text-white text-decoration-none small"
-                >
+                <a href="tel:+94776879778" className="text-white text-decoration-none small">
                   +94 776 879 778
                 </a>
               </div>
@@ -91,52 +95,62 @@ const ContactUsPage = () => {
                 <FaFacebook />
               </a>
             </div>
-
-            <p className="mt-4 small text-center text-secondary">
-              We'd love to hear from you — reach out with any questions or feedback.
-            </p>
           </div>
 
-          {/* Right Section — Contact Form */}
+          {/* Right — Form */}
           <div className="col-md-7 bg-white p-5">
-            <h3 className="fw-bold mb-4 text-uppercase text-center">Send Us a Message</h3>
+            <h3 className="fw-bold mb-4 text-uppercase text-center">
+              Send Us a Message
+            </h3>
+
+            {/* ✅ Inline Feedback */}
+            {status.message && (
+              <div
+                className={`alert ${
+                  status.type === "success" ? "alert-success" : "alert-danger"
+                } text-center py-2`}
+              >
+                {status.message}
+              </div>
+            )}
+
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
-                <label htmlFor="name" className="form-label fw-semibold">Name</label>
+                <label className="form-label fw-semibold">Name</label>
                 <input
                   type="text"
-                  className="form-control rounded-3"
-                  id="name"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
+                  className="form-control rounded-3"
                   required
                 />
               </div>
+
               <div className="mb-3">
-                <label htmlFor="email" className="form-label fw-semibold">Email</label>
+                <label className="form-label fw-semibold">Email</label>
                 <input
                   type="email"
-                  className="form-control rounded-3"
-                  id="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
+                  className="form-control rounded-3"
                   required
                 />
               </div>
+
               <div className="mb-3">
-                <label htmlFor="message" className="form-label fw-semibold">Message</label>
+                <label className="form-label fw-semibold">Message</label>
                 <textarea
-                  className="form-control rounded-3"
-                  id="message"
                   name="message"
                   rows="5"
                   value={formData.message}
                   onChange={handleChange}
+                  className="form-control rounded-3"
                   required
                 ></textarea>
               </div>
+
               <div className="text-center">
                 <button
                   type="submit"
