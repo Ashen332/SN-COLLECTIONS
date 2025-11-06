@@ -67,12 +67,22 @@ const ContactUsPage = () => {
               </div>
             </div>
 
-            <div className="info-item mb-4 d-flex align-items-start">
+            {/* First Contact Number */}
+            <div className="info-item mb-3 d-flex align-items-start">
               <FaPhoneAlt size={20} className="me-3 text-light mt-1" />
               <div>
                 <p className="mb-1 fw-semibold">Phone</p>
-                <a href="tel:+94776879778" className="text-white text-decoration-none small">
+                <a
+                  href="tel:+94776879778"
+                  className="text-white text-decoration-none small d-block"
+                >
                   +94 776 879 778
+                </a>
+                <a
+                  href="tel:+94714821003"
+                  className="text-white text-decoration-none small d-block"
+                >
+                  +94 714 821 003
                 </a>
               </div>
             </div>
