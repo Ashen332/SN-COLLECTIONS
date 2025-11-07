@@ -60,7 +60,7 @@ const CheckoutPage = () => {
 
     setSending(true);
     try {
-      const res = await fetch("http://localhost:5000/send-order", {
+      const res = await fetch("https://sn-collections.onrender.com/send-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(orderData),
