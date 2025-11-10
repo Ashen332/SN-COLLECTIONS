@@ -5,13 +5,14 @@ import "./CheckoutPage.css";
 const CheckoutPage = () => {
   const [cartItems, setCartItems] = useState([]);
   const [subtotal, setSubtotal] = useState(0);
-  const [shipping] = useState(450); // Fixed shipping fee
+  const [shipping] = useState(450);
   const [total, setTotal] = useState(0);
   const [paymentMethod, setPaymentMethod] = useState("cod");
   const [file, setFile] = useState(null);
   const [sending, setSending] = useState(false);
   const [errors, setErrors] = useState({});
 
+  // Auto-load cart
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
     setCartItems(storedCart);
@@ -22,6 +23,7 @@ const CheckoutPage = () => {
 
   const handleFileChange = (e) => setFile(e.target.files[0]);
 
+  // Validate checkout form
   const validateForm = (form) => {
     const newErrors = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -41,6 +43,7 @@ const CheckoutPage = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+  // Place order
   const handlePlaceOrder = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -60,7 +63,12 @@ const CheckoutPage = () => {
 
     setSending(true);
     try {
-      const res = await fetch("https://sn-collections.onrender.com/send-order", {
+      const apiBase =
+        process.env.NODE_ENV === "production"
+          ? "https://sn-collections.onrender.com"
+          : "http://localhost:5000";
+
+      const res = await fetch(`${apiBase}/send-order`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(orderData),
@@ -72,11 +80,10 @@ const CheckoutPage = () => {
         localStorage.removeItem("cart");
         window.location.href = "/order-success";
       } else {
-        alert("Failed to send order email. Please try again.");
+        console.error("Order failed:", data.error);
       }
     } catch (err) {
       console.error("Order send error:", err);
-      alert("Error sending your order. Please try again later.");
     } finally {
       setSending(false);
     }
@@ -95,7 +102,6 @@ const CheckoutPage = () => {
               <h5 className="fw-semibold mb-4 text-dark">Billing Details</h5>
               <form onSubmit={handlePlaceOrder} noValidate>
                 <div className="row g-3">
-                  {/* First Name */}
                   <div className="col-md-6">
                     <label className="form-label fw-semibold">First Name</label>
                     <input
@@ -106,7 +112,6 @@ const CheckoutPage = () => {
                     {errors.firstName && <div className="invalid-feedback">{errors.firstName}</div>}
                   </div>
 
-                  {/* Last Name */}
                   <div className="col-md-6">
                     <label className="form-label fw-semibold">Last Name</label>
                     <input
@@ -117,7 +122,6 @@ const CheckoutPage = () => {
                     {errors.lastName && <div className="invalid-feedback">{errors.lastName}</div>}
                   </div>
 
-                  {/* Email */}
                   <div className="col-12">
                     <label className="form-label fw-semibold">Email</label>
                     <input
@@ -128,7 +132,6 @@ const CheckoutPage = () => {
                     {errors.email && <div className="invalid-feedback">{errors.email}</div>}
                   </div>
 
-                  {/* Address */}
                   <div className="col-12">
                     <label className="form-label fw-semibold">Address</label>
                     <input
@@ -139,7 +142,6 @@ const CheckoutPage = () => {
                     {errors.address && <div className="invalid-feedback">{errors.address}</div>}
                   </div>
 
-                  {/* City */}
                   <div className="col-md-6">
                     <label className="form-label fw-semibold">City</label>
                     <input
@@ -150,7 +152,6 @@ const CheckoutPage = () => {
                     {errors.city && <div className="invalid-feedback">{errors.city}</div>}
                   </div>
 
-                  {/* Postal */}
                   <div className="col-md-6">
                     <label className="form-label fw-semibold">Postal Code</label>
                     <input
@@ -161,7 +162,6 @@ const CheckoutPage = () => {
                     {errors.postal && <div className="invalid-feedback">{errors.postal}</div>}
                   </div>
 
-                  {/* Phone */}
                   <div className="col-12">
                     <label className="form-label fw-semibold">Phone</label>
                     <input
@@ -173,10 +173,9 @@ const CheckoutPage = () => {
                   </div>
                 </div>
 
-                {/* Payment Method */}
+                {/* Payment Section */}
                 <div className="mt-4">
                   <h6 className="fw-semibold mb-3">Payment Method</h6>
-
                   <div className="form-check mb-2">
                     <input
                       className="form-check-input"
@@ -205,7 +204,6 @@ const CheckoutPage = () => {
                     </label>
                   </div>
 
-                  {/* CDM Upload */}
                   {paymentMethod === "cdm" && (
                     <div className="cdm-box p-4 bg-light border rounded-4 mt-3">
                       <h6 className="fw-bold mb-3 text-uppercase text-dark">Bank Details</h6>
@@ -215,7 +213,6 @@ const CheckoutPage = () => {
                         <li><strong>Account Name:</strong> S.N. Collection</li>
                         <li><strong>Account No:</strong> 035010048841-C/A</li>
                       </ul>
-
                       <label className="form-label fw-semibold">Upload Payment Slip</label>
                       <input
                         type="file"
@@ -264,9 +261,7 @@ const CheckoutPage = () => {
                           </small>
                         </div>
                       </div>
-                      <p className="fw-semibold mb-0 small text-secondary">
-                        ×{item.quantity}
-                      </p>
+                      <p className="fw-semibold mb-0 small text-secondary">×{item.quantity}</p>
                     </div>
                   ))}
                   <hr />
