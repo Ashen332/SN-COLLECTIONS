@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-import cors from "cors";
+
 
 const allowedOrigins = [
   "https://sncollections.lk",
