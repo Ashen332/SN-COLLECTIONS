@@ -12,7 +12,7 @@ const ContactUsPage = () => {
   const API_BASE =
     window.location.hostname === "localhost"
       ? "http://localhost:5000"
-      : "https://sn-collections.onrender.com";
+      : "https://api.sncollections.lk";
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

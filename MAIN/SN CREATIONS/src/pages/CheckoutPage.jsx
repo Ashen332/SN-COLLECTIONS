@@ -65,7 +65,7 @@ const CheckoutPage = () => {
     try {
       const apiBase =
         process.env.NODE_ENV === "production"
-          ? "https://sn-collections.onrender.com"
+          ? "https://api.sncollections.lk"
           : "http://localhost:5000";
 
       const res = await fetch(`${apiBase}/send-order`, {
