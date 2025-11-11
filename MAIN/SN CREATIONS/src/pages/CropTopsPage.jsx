@@ -4,18 +4,18 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./AllTopsPage.css"; // reuse same CSS styling
 
 // ✅ Import images
-import DSC00047 from "../assets/DSC00047.jpg";
-import DSC00052 from "../assets/DSC00052.jpg";
-import DSC00055 from "../assets/DSC00055.jpg";
-import DSC00059 from "../assets/DSC00059.jpg";
-import DSC00077 from "../assets/DSC00077.jpg";
-import DSC09965 from "../assets/DSC09965.jpg";
-import DSC09972 from "../assets/DSC09972.jpg";
-import DSC09982 from "../assets/DSC09982.jpg";
-import DSC09988 from "../assets/DSC09988.jpg";
-import DSC09994 from "../assets/DSC09994.jpg";
-import DSC09997 from "../assets/DSC09997.jpg";
-import DSC09998 from "../assets/DSC09998.jpg";
+import DSC00047 from "../optimized/DSC00047.webp";
+import DSC00052 from "../optimized/DSC00052.webp";
+import DSC00055 from "../optimized/DSC00055.webp";
+import DSC00059 from "../optimized/DSC00059.webp";
+import DSC00077 from "../optimized/DSC00077.webp";
+import DSC09965 from "../optimized/DSC09965.webp";
+import DSC09972 from "../optimized/DSC09972.webp";
+import DSC09982 from "../optimized/DSC09982.webp";
+import DSC09988 from "../optimized/DSC09988.webp";
+import DSC09994 from "../optimized/DSC09994.webp";
+import DSC09997 from "../optimized/DSC09997.webp";
+import DSC09998 from "../optimized/DSC09998.webp";
 
 const CropTopsPage = () => {
   const navigate = useNavigate();

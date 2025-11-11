@@ -4,16 +4,16 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./AllTopsPage.css"; // ✅ Reuse same consistent styling
 
 // ✅ Import images
-import DSC00399 from "../assets/DSC00399.jpg";
-import DSC00430 from "../assets/DSC00430.jpg";
-import DSC00447 from "../assets/DSC00447.jpg";
-import DSC00456 from "../assets/DSC00456.jpg";
-import DSC00458 from "../assets/DSC00458.jpg";
+import DSC00399 from "../optimized/DSC00399.webp";
+import DSC00430 from "../optimized/DSC00430.webp";
+import DSC00447 from "../optimized/DSC00447.webp";
+import DSC00456 from "../optimized/DSC00456.webp";
+import DSC00458 from "../optimized/DSC00458.webp";
 
-import DSC00597 from "../assets/DSC00597.jpg";
-import DSC00628 from "../assets/DSC00628.jpg";
-import DSC00645 from "../assets/DSC00645.jpg";
-import DSC00652 from "../assets/DSC00652.jpg";
+import DSC00597 from "../optimized/DSC00597.webp";
+import DSC00628 from "../optimized/DSC00628.webp";
+import DSC00645 from "../optimized/DSC00645.webp";
+import DSC00652 from "../optimized/DSC00652.webp";
 
 const MidiDressesPage = () => {
   const navigate = useNavigate();

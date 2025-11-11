@@ -5,53 +5,53 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./AllTopsPage.css"; // ✅ use same modern black-white styling
 
 // ✅ Import images
-import DSC00660 from "../assets/DSC00660.jpg";
-import DSC00687 from "../assets/DSC00687.jpg";
-import DSC00727 from "../assets/DSC00727.jpg";
-import DSC00735 from "../assets/DSC00735.jpg";
+import DSC00660 from "../optimized/DSC00660.webp";
+import DSC00687 from "../optimized/DSC00687.webp";
+import DSC00727 from "../optimized/DSC00727.webp";
+import DSC00735 from "../optimized/DSC00735.webp";
 
-import DSC00230 from "../assets/DSC00230.jpg";
-import DSC00264 from "../assets/DSC00264.jpg";
-import DSC00280 from "../assets/DSC00280.jpg";
-import DSC00284 from "../assets/DSC00284.jpg";
+import DSC00230 from "../optimized/DSC00230.webp";
+import DSC00264 from "../optimized/DSC00264.webp";
+import DSC00280 from "../optimized/DSC00280.webp";
+import DSC00284 from "../optimized/DSC00284.webp";
 
-import DSC00312 from "../assets/DSC00312.jpg";
-import DSC00347 from "../assets/DSC00347.jpg";
-import DSC00369 from "../assets/DSC00369.jpg";
-import DSC00376 from "../assets/DSC00376.jpg";
+import DSC00312 from "../optimized/DSC00312.webp";
+import DSC00347 from "../optimized/DSC00347.webp";
+import DSC00369 from "../optimized/DSC00369.webp";
+import DSC00376 from "../optimized/DSC00376.webp";
 
-import DSC00399 from "../assets/DSC00399.jpg";
-import DSC00430 from "../assets/DSC00430.jpg";
-import DSC00447 from "../assets/DSC00447.jpg";
-import DSC00456 from "../assets/DSC00456.jpg";
-import DSC00458 from "../assets/DSC00458.jpg";
+import DSC00399 from "../optimized/DSC00399.webp";
+import DSC00430 from "../optimized/DSC00430.webp";
+import DSC00447 from "../optimized/DSC00447.webp";
+import DSC00456 from "../optimized/DSC00456.webp";
+import DSC00458 from "../optimized/DSC00458.webp";
 
-import DSC00597 from "../assets/DSC00597.jpg";
-import DSC00628 from "../assets/DSC00628.jpg";
-import DSC00645 from "../assets/DSC00645.jpg";
-import DSC00652 from "../assets/DSC00652.jpg";
+import DSC00597 from "../optimized/DSC00597.webp";
+import DSC00628 from "../optimized/DSC00628.webp";
+import DSC00645 from "../optimized/DSC00645.webp";
+import DSC00652 from "../optimized/DSC00652.webp";
 
-import DSC00823 from "../assets/DSC00823.jpg";
-import DSC00832 from "../assets/DSC00832.jpg";
-import DSC00845 from "../assets/DSC00845.jpg";
-import DSC00849 from "../assets/DSC00849.jpg";
-import DSC00854 from "../assets/DSC00854.jpg";
+import DSC00823 from "../optimized/DSC00823.webp";
+import DSC00832 from "../optimized/DSC00832.webp";
+import DSC00845 from "../optimized/DSC00845.webp";
+import DSC00849 from "../optimized/DSC00849.webp";
+import DSC00854 from "../optimized/DSC00854.webp";
 
-import DSC00473 from "../assets/DSC00473.jpg";
-import DSC00502 from "../assets/DSC00502.jpg";
-import DSC00535 from "../assets/DSC00535.jpg";
-import DSC00553 from "../assets/DSC00553.jpg";
+import DSC00473 from "../optimized/DSC00473.webp";
+import DSC00502 from "../optimized/DSC00502.webp";
+import DSC00535 from "../optimized/DSC00535.webp";
+import DSC00553 from "../optimized/DSC00553.webp";
 
-import DSC00871 from "../assets/DSC00871.jpg";
-import DSC00883 from "../assets/DSC00883.jpg";
-import DSC00913 from "../assets/DSC00913.jpg";
-import DSC00921 from "../assets/DSC00921.jpg";
+import DSC00871 from "../optimized/DSC00871.webp";
+import DSC00883 from "../optimized/DSC00883.webp";
+import DSC00913 from "../optimized/DSC00913.webp";
+import DSC00921 from "../optimized/DSC00921.webp";
 
-import DSC00946 from "../assets/DSC00946.jpg";
-import DSC01045 from "../assets/DSC01045.jpg";
-import DSC01058 from "../assets/DSC01058.jpg";
-import DSC01071 from "../assets/DSC01071.jpg";
-import DSC01075 from "../assets/DSC01075.jpg";
+import DSC00946 from "../optimized/DSC00946.webp";
+import DSC01045 from "../optimized/DSC01045.webp";
+import DSC01058 from "../optimized/DSC01058.webp";
+import DSC01071 from "../optimized/DSC01071.webp";
+import DSC01075 from "../optimized/DSC01075.webp";
 
 const DressesPage = () => {
   const navigate = useNavigate();

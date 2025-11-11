@@ -4,10 +4,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 // ✅ Import images
-import DSC09965 from "../assets/DSC09965.jpg";
-import DSC09972 from "../assets/DSC09972.jpg";
-import DSC09982 from "../assets/DSC09982.jpg";
-import DSC09988 from "../assets/DSC09988.jpg";
+import DSC09965 from "../optimized/DSC09965.webp";
+import DSC09972 from "../optimized/DSC09972.webp";
+import DSC09982 from "../optimized/DSC09982.webp";
+import DSC09988 from "../optimized/DSC09988.webp";
 
 const ShortSleeveTopsPage = () => {
   const navigate = useNavigate();

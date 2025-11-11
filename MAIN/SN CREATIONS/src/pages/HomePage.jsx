@@ -6,22 +6,22 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import NavBar from "./NavBar";
 
 // Hero images
-import img1 from "../assets/1.png";
-import img2 from "../assets/2.png";
-import img3 from "../assets/3.png";
-import img4 from "../assets/4.png";
+import img1 from "../optimized/1.webp";
+import img2 from "../optimized/2.webp";
+import img3 from "../optimized/3.webp";
+import img4 from "../optimized/4.webp";
 
 // Category images
-import mini1 from "../assets/DSC00660.jpg";
-import midi1 from "../assets/DSC00399.jpg";
-import maxi1 from "../assets/DSC00823.jpg";
-import top1 from "../assets/DSC00123.jpg";
+import mini1 from "../optimized/DSC00660.webp";
+import midi1 from "../optimized/DSC00399.webp";
+import maxi1 from "../optimized/DSC00823.webp";
+import top1 from "../optimized/DSC00123.webp";
 
 // Featured product images
-import feat1 from "../assets/DSC00727.jpg";
-import feat2 from "../assets/DSC00652.jpg";
-import feat3 from "../assets/DSC00535.jpg";
-import feat4 from "../assets/DSC00206.jpg";
+import feat1 from "../optimized/DSC00727.webp";
+import feat2 from "../optimized/DSC00652.webp";
+import feat3 from "../optimized/DSC00535.webp";
+import feat4 from "../optimized/DSC00206.webp";
 
 const images = [img1, img2, img3, img4];
 

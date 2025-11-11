@@ -4,27 +4,27 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./AllTopsPage.css"; // ✅ reuse for consistent style
 
 // ✅ Import images
-import DSC00823 from "../assets/DSC00823.jpg";
-import DSC00832 from "../assets/DSC00832.jpg";
-import DSC00845 from "../assets/DSC00845.jpg";
-import DSC00849 from "../assets/DSC00849.jpg";
-import DSC00854 from "../assets/DSC00854.jpg";
+import DSC00823 from "../optimized/DSC00823.webp";
+import DSC00832 from "../optimized/DSC00832.webp";
+import DSC00845 from "../optimized/DSC00845.webp";
+import DSC00849 from "../optimized/DSC00849.webp";
+import DSC00854 from "../optimized/DSC00854.webp";
 
-import DSC00473 from "../assets/DSC00473.jpg";
-import DSC00502 from "../assets/DSC00502.jpg";
-import DSC00535 from "../assets/DSC00535.jpg";
-import DSC00553 from "../assets/DSC00553.jpg";
+import DSC00473 from "../optimized/DSC00473.webp";
+import DSC00502 from "../optimized/DSC00502.webp";
+import DSC00535 from "../optimized/DSC00535.webp";
+import DSC00553 from "../optimized/DSC00553.webp";
 
-import DSC00871 from "../assets/DSC00871.jpg";
-import DSC00883 from "../assets/DSC00883.jpg";
-import DSC00913 from "../assets/DSC00913.jpg";
-import DSC00921 from "../assets/DSC00921.jpg";
+import DSC00871 from "../optimized/DSC00871.webp";
+import DSC00883 from "../optimized/DSC00883.webp";
+import DSC00913 from "../optimized/DSC00913.webp";
+import DSC00921 from "../optimized/DSC00921.webp";
 
-import DSC00946 from "../assets/DSC00946.jpg";
-import DSC01045 from "../assets/DSC01045.jpg";
-import DSC01058 from "../assets/DSC01058.jpg";
-import DSC01071 from "../assets/DSC01071.jpg";
-import DSC01075 from "../assets/DSC01075.jpg";
+import DSC00946 from "../optimized/DSC00946.webp";
+import DSC01045 from "../optimized/DSC01045.webp";
+import DSC01058 from "../optimized/DSC01058.webp";
+import DSC01071 from "../optimized/DSC01071.webp";
+import DSC01075 from "../optimized/DSC01075.webp";
 
 const MaxiDressesPage = () => {
   const navigate = useNavigate();

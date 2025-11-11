@@ -4,14 +4,14 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./AllTopsPage.css"; // reuse same professional style
 
 // ✅ Import images
-import DSC00123 from "../assets/DSC00123.jpg";
-import DSC00140 from "../assets/DSC00140.jpg";
-import DSC00151 from "../assets/DSC00151.jpg";
-import DSC00159 from "../assets/DSC00159.jpg";
-import DSC00187 from "../assets/DSC00187.jpg";
-import DSC00203 from "../assets/DSC00203.jpg";
-import DSC00206 from "../assets/DSC00206.jpg";
-import DSC00228 from "../assets/DSC00228.jpg";
+import DSC00123 from "../optimized/DSC00123.webp";
+import DSC00140 from "../optimized/DSC00140.webp";
+import DSC00151 from "../optimized/DSC00151.webp";
+import DSC00159 from "../optimized/DSC00159.webp";
+import DSC00187 from "../optimized/DSC00187.webp";
+import DSC00203 from "../optimized/DSC00203.webp";
+import DSC00206 from "../optimized/DSC00206.webp";
+import DSC00228 from "../optimized/DSC00228.webp";
 
 const LongSleeveTopsPage = () => {
   const navigate = useNavigate();

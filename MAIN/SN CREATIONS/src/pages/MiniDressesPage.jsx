@@ -4,18 +4,18 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./AllTopsPage.css"; // ✅ Reuse same styling for consistency
 
 // ✅ Import images
-import DSC00660 from "../assets/DSC00660.jpg";
-import DSC00687 from "../assets/DSC00687.jpg";
-import DSC00727 from "../assets/DSC00727.jpg";
-import DSC00735 from "../assets/DSC00735.jpg";
-import DSC00230 from "../assets/DSC00230.jpg";
-import DSC00264 from "../assets/DSC00264.jpg";
-import DSC00280 from "../assets/DSC00280.jpg";
-import DSC00284 from "../assets/DSC00284.jpg";
-import DSC00312 from "../assets/DSC00312.jpg";
-import DSC00347 from "../assets/DSC00347.jpg";
-import DSC00369 from "../assets/DSC00369.jpg";
-import DSC00376 from "../assets/DSC00376.jpg";
+import DSC00660 from "../optimized/DSC00660.webp";
+import DSC00687 from "../optimized/DSC00687.webp";
+import DSC00727 from "../optimized/DSC00727.webp";
+import DSC00735 from "../optimized/DSC00735.webp";
+import DSC00230 from "../optimized/DSC00230.webp";
+import DSC00264 from "../optimized/DSC00264.webp";
+import DSC00280 from "../optimized/DSC00280.webp";
+import DSC00284 from "../optimized/DSC00284.webp";
+import DSC00312 from "../optimized/DSC00312.webp";
+import DSC00347 from "../optimized/DSC00347.webp";
+import DSC00369 from "../optimized/DSC00369.webp";
+import DSC00376 from "../optimized/DSC00376.webp";
 
 const MiniDressesPage = () => {
   const navigate = useNavigate();
