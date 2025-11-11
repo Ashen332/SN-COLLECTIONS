@@ -17,6 +17,8 @@ import CheckoutPage from "./pages/CheckoutPage.jsx";
 import OrderSuccessPage from "./pages/OrderSuccessPage.jsx";
  // ✅ added
 
+import ScrollToTop from "./pages/ScrollToTop.jsx";
+
 function App() {
   return (
     <div
@@ -30,6 +32,7 @@ function App() {
     >
       {/* Persistent Navbar */}
       <NavBar />
+      <ScrollToTop />
 
       {/* Page Content */}
       <main style={{ flex: 1, marginTop: "100px" }}>
