@@ -7,8 +7,8 @@ import CartDropdown from "./CartDropDown";
 const NavBar = () => {
   const [showCart, setShowCart] = useState(false);
   const [cartQuantity, setCartQuantity] = useState(0);
+  const [expanded, setExpanded] = useState(false);
 
-  // Update cart quantity on load and when localStorage changes
   useEffect(() => {
     const updateCartQuantity = () => {
       const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -17,38 +17,45 @@ const NavBar = () => {
     };
 
     updateCartQuantity();
-
-    // Listen to storage events if cart changes in another tab
     window.addEventListener("storage", updateCartQuantity);
     return () => window.removeEventListener("storage", updateCartQuantity);
   }, [showCart]);
 
   return (
-    <RBNavbar expand="lg" bg="light" fixed="top" className="shadow-sm px-5 py-3">
+    <RBNavbar
+      expand="lg"
+      bg="light"
+      fixed="top"
+      expanded={expanded}
+      onToggle={() => setExpanded(!expanded)}
+      className="shadow-sm px-5 py-3"
+    >
       <Container>
-        <RBNavbar.Brand as={Link} to="/" className="fw-bold fs-3">
+        <RBNavbar.Brand as={Link} to="/" className="fw-bold fs-3" onClick={() => setExpanded(false)}>
           SN COLLECTIONS
         </RBNavbar.Brand>
+
         <RBNavbar.Toggle aria-controls="navbarNav" />
         <RBNavbar.Collapse id="navbarNav" className="justify-content-end">
           <Nav className="align-items-lg-center">
+
             <NavDropdown title="TOPS" id="topsDropdown" className="mx-3">
-              <NavDropdown.Item as={Link} to="/tops/all">All Tops</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/tops/all" onClick={() => setExpanded(false)}>All Tops</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item as={Link} to="/tops/long-sleeve">Long Sleeve Tops</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/tops/short-sleeve">Short Sleeve Tops</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/tops/crop">Crop Tops</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/tops/long-sleeve" onClick={() => setExpanded(false)}>Long Sleeve Tops</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/tops/short-sleeve" onClick={() => setExpanded(false)}>Short Sleeve Tops</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/tops/crop" onClick={() => setExpanded(false)}>Crop Tops</NavDropdown.Item>
             </NavDropdown>
 
             <NavDropdown title="DRESSES" id="dressesDropdown" className="mx-3">
-              <NavDropdown.Item as={Link} to="/dresses/all">All Dresses</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/dresses/all" onClick={() => setExpanded(false)}>All Dresses</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item as={Link} to="/dresses/mini">Mini Dresses</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/dresses/midi">Midi Dresses</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/dresses/maxi">Maxi Dresses</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/dresses/mini" onClick={() => setExpanded(false)}>Mini Dresses</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/dresses/midi" onClick={() => setExpanded(false)}>Midi Dresses</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/dresses/maxi" onClick={() => setExpanded(false)}>Maxi Dresses</NavDropdown.Item>
             </NavDropdown>
 
-            <Nav.Link as={Link} to="/contact" className="mx-3">
+            <Nav.Link as={Link} to="/contact" className="mx-3" onClick={() => setExpanded(false)}>
               CONTACT
             </Nav.Link>
 
@@ -63,7 +70,7 @@ const NavBar = () => {
                     className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark"
                     style={{ fontSize: "0.65rem" }}
                   >
-                    {cartQuantity} {/* Total items in cart */}
+                    {cartQuantity}
                   </span>
                 )}
               </button>
