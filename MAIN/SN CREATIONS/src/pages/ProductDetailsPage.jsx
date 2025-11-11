@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./ProductDetailsPage.css";
+import { FaMinus, FaPlus } from "react-icons/fa";
 
 const ProductDetailsPage = () => {
   const location = useLocation();
@@ -125,9 +126,8 @@ const ProductDetailsPage = () => {
                   key={index}
                   src={img}
                   alt={`${product.name} ${index + 1}`}
-                  className={`thumbnail-img rounded ${
-                    mainImage === img ? "border border-dark border-2" : "border"
-                  }`}
+                  className={`thumbnail-img rounded ${mainImage === img ? "border border-dark border-2" : "border"
+                    }`}
                   onClick={() => setMainImage(img)}
                 />
               ))}
@@ -162,9 +162,8 @@ const ProductDetailsPage = () => {
                     key={index}
                     title={color.trim()}
                     onClick={() => setSelectedColor(color.trim())}
-                    className={`color-circle ${
-                      selectedColor === color.trim() ? "selected" : ""
-                    }`}
+                    className={`color-circle ${selectedColor === color.trim() ? "selected" : ""
+                      }`}
                     style={{
                       backgroundColor: color.trim().toLowerCase(),
                     }}
@@ -180,9 +179,8 @@ const ProductDetailsPage = () => {
                 {["XS", "S", "M", "L", "XL", "2XL"].map((size) => (
                   <button
                     key={size}
-                    className={`btn btn-outline-dark size-btn ${
-                      selectedSize === size ? "active" : ""
-                    }`}
+                    className={`btn btn-outline-dark size-btn ${selectedSize === size ? "active" : ""
+                      }`}
                     onClick={() => setSelectedSize(size)}
                   >
                     {size}
@@ -206,20 +204,29 @@ const ProductDetailsPage = () => {
 
             {/* QUANTITY */}
             <div className="quantity d-flex align-items-center gap-3 mb-4">
-              <button
-                className="btn btn-outline-dark rounded-circle"
-                onClick={() => setQuantity(Math.max(1, quantity - 1))}
-              >
-                −
-              </button>
-              <span className="fs-5 fw-semibold">{quantity}</span>
-              <button
-                className="btn btn-outline-dark rounded-circle"
-                onClick={() => setQuantity(quantity + 1)}
-              >
-                +
-              </button>
-            </div>
+  <button
+    type="button"
+    className="btn btn-outline-dark rounded-circle d-flex justify-content-center align-items-center"
+    style={{ width: '40px', height: '40px', padding: 0 }}
+    onClick={() => setQuantity(Math.max(1, quantity - 1))}
+    aria-label="Decrease quantity"
+  >
+    <FaMinus />
+  </button>
+
+  <span className="fs-5 fw-semibold">{quantity}</span>
+
+  <button
+    type="button"
+    className="btn btn-outline-dark rounded-circle d-flex justify-content-center align-items-center"
+    style={{ width: '40px', height: '40px', padding: 0 }}
+    onClick={() => setQuantity(quantity + 1)}
+    aria-label="Increase quantity"
+  >
+    <FaPlus />
+  </button>
+</div>
+
 
             {/* ADD TO CART */}
             <button
