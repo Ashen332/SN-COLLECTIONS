@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FaInstagram, FaFacebook, FaTiktok, FaPinterest } from "react-icons/fa";
 import "./Footer.css";
 
 const Footer = () => {
@@ -40,11 +41,27 @@ const Footer = () => {
           {/* Social Icons */}
           <div className="col-lg-3 col-md-12">
             <h6 className="footer-heading">Follow Us</h6>
-            <div className="social-icons mt-2">
-              <a href="#" aria-label="Instagram"><i className="bi bi-instagram"></i></a>
-              <a href="#" aria-label="Facebook"><i className="bi bi-facebook"></i></a>
-              <a href="#" aria-label="Tiktok"><i className="bi bi-tiktok"></i></a>
-              <a href="#" aria-label="Pinterest"><i className="bi bi-pinterest"></i></a>
+            <div className="social-icons mt-2 d-flex gap-3">
+              <a
+                href="https://www.instagram.com/sncollection230"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="footer-social"
+              >
+                <FaInstagram />
+              </a>
+              <a
+                href="https://www.facebook.com/profile.php?id=100063859521801"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="footer-social"
+              >
+                <FaFacebook />
+              </a>
+            
+              
             </div>
           </div>
         </div>
