@@ -32,9 +32,9 @@ const Footer = () => {
           <div className="col-lg-2 col-md-3 col-sm-6">
             <h6 className="footer-heading">Info</h6>
             <ul className="list-unstyled">
-              <li><Link to="/about">About Us</Link></li>
+              
               <li><Link to="/contact">Contact</Link></li>
-              <li><Link to="/policy">Privacy Policy</Link></li>
+              
             </ul>
           </div>
 
