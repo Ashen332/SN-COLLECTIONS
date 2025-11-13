@@ -3,6 +3,8 @@ import cors from "cors";
 import { Resend } from "resend";
 import dotenv from "dotenv";
 dotenv.config();
+console.log("📩 OWNER_EMAIL env:", process.env.OWNER_EMAIL);
+
 
 const app = express();
 
