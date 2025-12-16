@@ -1,19 +1,29 @@
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
+import dotenv from "dotenv";
 
-const resend = new Resend("re_VyZkubKn_MaocUR4ppqEEEzEqQUsa32xp");
+dotenv.config();
 
-async function sendTestEmail() {
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.OWNER_EMAIL,
+    pass: process.env.GMAIL_APP_PASSWORD,
+  },
+});
+
+async function testMail() {
   try {
-    const data = await resend.emails.send({
-      from: "onboarding@resend.dev",
-      to: "sncollection230@gmail.com",
-      subject: "Resend Test Email ✅",
-      html: "<p>Congrats! Your backend can now send emails 🎉</p>",
+    const info = await transporter.sendMail({
+      from: `"SN Collections Test" <${process.env.OWNER_EMAIL}>`,
+      to: process.env.OWNER_EMAIL,
+      subject: "✅ Gmail SMTP Test Successful",
+      text: "If you received this email, Gmail SMTP is working perfectly.",
     });
-    console.log("📨 Email sent successfully:", data);
-  } catch (error) {
-    console.error("❌ Email failed:", error);
+
+    console.log("✅ Email sent:", info.response);
+  } catch (err) {
+    console.error("❌ Email failed:", err.message);
   }
 }
 
-sendTestEmail();
+testMail();
