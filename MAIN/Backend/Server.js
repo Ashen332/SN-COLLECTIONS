@@ -47,8 +47,8 @@ app.post("/send-contact", async (req, res) => {
 
   try {
     await resend.emails.send({
-      // ✅ WORKING sender (no domain verification required)
-      from: "SN Collections <no-reply@resend.dev>",
+      // ✅ Use verified domain now
+      from: "SN Collections <contact@sncollections.lk>",
       to: process.env.OWNER_EMAIL,
       subject: `📩 New Message from ${name}`,
       html: `
@@ -60,7 +60,7 @@ app.post("/send-contact", async (req, res) => {
       `,
     });
 
-    console.log("✅ Contact email sent");
+    console.log("✅ Contact email sent from verified domain");
     res.json({ success: true });
   } catch (err) {
     console.error("❌ Resend error:", err?.response || err);
@@ -77,13 +77,13 @@ app.post("/send-order", async (req, res) => {
 
   try {
     await resend.emails.send({
-      from: "SN Collections <no-reply@resend.dev>",
+      from: "SN Collections <contact@sncollections.lk>",
       to: process.env.OWNER_EMAIL,
       subject: "🛍️ New Order Received",
       html: `<pre>${JSON.stringify(req.body, null, 2)}</pre>`,
     });
 
-    console.log("✅ Order email sent");
+    console.log("✅ Order email sent from verified domain");
     res.json({ success: true });
   } catch (err) {
     console.error("❌ Order email error:", err?.response || err);
