@@ -204,28 +204,28 @@ const ProductDetailsPage = () => {
 
             {/* QUANTITY */}
             <div className="quantity d-flex align-items-center gap-3 mb-4">
-  <button
-    type="button"
-    className="btn btn-outline-dark rounded-circle d-flex justify-content-center align-items-center"
-    style={{ width: '40px', height: '40px', padding: 0 }}
-    onClick={() => setQuantity(Math.max(1, quantity - 1))}
-    aria-label="Decrease quantity"
-  >
-    <FaMinus />
-  </button>
+              <button
+                type="button"
+                className="btn btn-outline-dark rounded-circle d-flex justify-content-center align-items-center"
+                style={{ width: '40px', height: '40px', padding: 0 }}
+                onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                aria-label="Decrease quantity"
+              >
+                <FaMinus />
+              </button>
 
-  <span className="fs-5 fw-semibold">{quantity}</span>
+              <span className="fs-5 fw-semibold">{quantity}</span>
 
-  <button
-    type="button"
-    className="btn btn-outline-dark rounded-circle d-flex justify-content-center align-items-center"
-    style={{ width: '40px', height: '40px', padding: 0 }}
-    onClick={() => setQuantity(quantity + 1)}
-    aria-label="Increase quantity"
-  >
-    <FaPlus />
-  </button>
-</div>
+              <button
+                type="button"
+                className="btn btn-outline-dark rounded-circle d-flex justify-content-center align-items-center"
+                style={{ width: '40px', height: '40px', padding: 0 }}
+                onClick={() => setQuantity(quantity + 1)}
+                aria-label="Increase quantity"
+              >
+                <FaPlus />
+              </button>
+            </div>
 
 
             {/* ADD TO CART */}

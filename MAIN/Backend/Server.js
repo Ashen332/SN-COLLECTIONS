@@ -5,8 +5,10 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-console.log("📩 OWNER_EMAIL:", process.env.OWNER_EMAIL);
+/* ---------------- ENV CHECK ---------------- */
+console.log("📩 OWNER_EMAIL:", process.env.OWNER_EMAIL ? "Loaded ✅" : "Missing ❌");
 
+/* ---------------- APP INIT ---------------- */
 const app = express();
 
 /* ---------------- CORS ---------------- */
@@ -30,13 +32,23 @@ app.use(
 
 app.use(express.json());
 
-/* ---------------- GMAIL SMTP ---------------- */
+/* ---------------- GMAIL SMTP (PRODUCTION SAFE) ---------------- */
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true, // REQUIRED on cloud servers
   auth: {
     user: process.env.OWNER_EMAIL,
     pass: process.env.GMAIL_APP_PASSWORD,
   },
+});
+
+transporter.verify((err) => {
+  if (err) {
+    console.error("❌ Gmail SMTP error:", err);
+  } else {
+    console.log("📧 Gmail SMTP ready ✅");
+  }
 });
 
 /* ---------------- HEALTH CHECK ---------------- */
@@ -46,6 +58,8 @@ app.get("/", (req, res) => {
 
 /* ---------------- ORDER EMAIL ---------------- */
 app.post("/send-order", async (req, res) => {
+  console.log("📦 /send-order hit");
+
   const order = req.body;
   if (!order) return res.status(400).json({ error: "Missing order data" });
 
@@ -63,10 +77,10 @@ app.post("/send-order", async (req, res) => {
         <p><b>Payment Method:</b> ${
           order.payment === "cdm" ? "CDM Deposit" : "Cash on Delivery"
         }</p>
-        <p><b>Total Amount:</b> LKR ${order.total.toLocaleString()}</p>
+        <p><b>Total Amount:</b> LKR ${Number(order.total).toLocaleString()}</p>
 
         <h3>🧾 Order Items</h3>
-        <table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%;">
+        <table border="1" cellpadding="8" cellspacing="0" style="border-collapse:collapse;width:100%">
           <thead style="background:#f5f5f5">
             <tr>
               <th>Product</th>
@@ -85,7 +99,7 @@ app.post("/send-order", async (req, res) => {
                   <td>${item.color}</td>
                   <td>${item.size}</td>
                   <td>${item.quantity}</td>
-                  <td>${item.total.toLocaleString()}</td>
+                  <td>${Number(item.total).toLocaleString()}</td>
                 </tr>`
               )
               .join("")}
@@ -94,7 +108,7 @@ app.post("/send-order", async (req, res) => {
       `,
     });
 
-    console.log("✅ Order email sent (Gmail SMTP)");
+    console.log("✅ Order email sent");
     res.json({ success: true });
   } catch (err) {
     console.error("❌ Order email error:", err);
@@ -104,6 +118,8 @@ app.post("/send-order", async (req, res) => {
 
 /* ---------------- CONTACT EMAIL ---------------- */
 app.post("/send-contact", async (req, res) => {
+  console.log("📩 /send-contact hit");
+
   const { name, email, message } = req.body;
   if (!name || !email || !message)
     return res.status(400).json({ error: "All fields required" });
@@ -121,7 +137,7 @@ app.post("/send-contact", async (req, res) => {
       `,
     });
 
-    console.log("✅ Contact email sent (Gmail SMTP)");
+    console.log("✅ Contact email sent");
     res.json({ success: true });
   } catch (err) {
     console.error("❌ Contact email error:", err);
@@ -131,6 +147,6 @@ app.post("/send-contact", async (req, res) => {
 
 /* ---------------- START SERVER ---------------- */
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () =>
-  console.log(`🚀 Server running on port ${PORT}`)
-);
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+});
