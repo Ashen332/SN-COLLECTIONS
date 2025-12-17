@@ -73,9 +73,10 @@ app.post("/send-contact", async (req, res) => {
 
 /* ---------------- ORDER ---------------- */
 app.post("/send-order", async (req, res) => {
-  console.log("🛍️ Order received:", req.body);
+  const order = req.body;
+  console.log("🛍️ Order received:", order);
 
-  if (!req.body || Object.keys(req.body).length === 0) {
+  if (!order || Object.keys(order).length === 0) {
     console.log("⚠️ Order request is empty");
     return res.status(400).json({ success: false, error: "Missing order data" });
   }
@@ -84,10 +85,45 @@ app.post("/send-order", async (req, res) => {
     const response = await resend.emails.send({
       from: "SN Collections <contact@sncollections.lk>",
       to: process.env.OWNER_EMAIL,
-      subject: "🛍️ New Order Received",
+      subject: `🛍️ New Order from ${order.name}`,
       html: `
-        <h3>New Order Received</h3>
-        <pre>${JSON.stringify(req.body, null, 2)}</pre>
+        <h2>New Order Received</h2>
+        <p><strong>Name:</strong> ${order.name}</p>
+        <p><strong>Email:</strong> ${order.email}</p>
+        <p><strong>Phone:</strong> ${order.phone}</p>
+        <p><strong>Address:</strong> ${order.address}, ${order.city}, ${order.postal}</p>
+        <p><strong>Payment Method:</strong> ${order.payment === "cod" ? "Cash on Delivery" : "CDM Deposit"}</p>
+        <p><strong>Total Amount:</strong> LKR ${order.total.toLocaleString()}</p>
+
+        <h3>🧾 Order Items</h3>
+        <table border="1" cellspacing="0" cellpadding="8" style="border-collapse: collapse; width: 100%;">
+          <thead style="background-color:#f5f5f5;">
+            <tr>
+              <th>Product</th>
+              <th>Color</th>
+              <th>Size</th>
+              <th>Qty</th>
+              <th>Total (LKR)</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${order.items
+              .map(
+                (item) => `
+                <tr>
+                  <td>${item.name}</td>
+                  <td>${item.color}</td>
+                  <td>${item.size}</td>
+                  <td>${item.quantity}</td>
+                  <td>${item.total.toLocaleString()}</td>
+                </tr>
+              `
+              )
+              .join("")}
+          </tbody>
+        </table>
+
+        <p style="margin-top:15px;">Check your dashboard for confirmation.</p>
       `,
     });
 
