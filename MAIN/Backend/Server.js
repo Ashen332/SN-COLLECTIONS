@@ -40,14 +40,14 @@ app.post("/send-contact", async (req, res) => {
   const { name, email, message } = req.body;
 
   if (!name || !email || !message) {
-    return res.status(400).json({ success: false });
+    console.log("⚠️ Contact request missing fields:", req.body);
+    return res.status(400).json({ success: false, error: "All fields required" });
   }
 
   console.log("📨 Contact message received:", req.body);
 
   try {
-    await resend.emails.send({
-      // ✅ Use verified domain now
+    const response = await resend.emails.send({
       from: "SN Collections <contact@sncollections.lk>",
       to: process.env.OWNER_EMAIL,
       subject: `📩 New Message from ${name}`,
@@ -60,10 +60,10 @@ app.post("/send-contact", async (req, res) => {
       `,
     });
 
-    console.log("✅ Contact email sent from verified domain");
-    res.json({ success: true });
+    console.log("✅ Contact email sent from verified domain:", response);
+    res.json({ success: true, data: response });
   } catch (err) {
-    console.error("❌ Resend error:", err?.response || err);
+    console.error("❌ Contact email error:", err?.response || err);
     res.status(500).json({
       success: false,
       error: err?.message || "Email failed",
@@ -75,16 +75,24 @@ app.post("/send-contact", async (req, res) => {
 app.post("/send-order", async (req, res) => {
   console.log("🛍️ Order received:", req.body);
 
+  if (!req.body || Object.keys(req.body).length === 0) {
+    console.log("⚠️ Order request is empty");
+    return res.status(400).json({ success: false, error: "Missing order data" });
+  }
+
   try {
-    await resend.emails.send({
+    const response = await resend.emails.send({
       from: "SN Collections <contact@sncollections.lk>",
       to: process.env.OWNER_EMAIL,
       subject: "🛍️ New Order Received",
-      html: `<pre>${JSON.stringify(req.body, null, 2)}</pre>`,
+      html: `
+        <h3>New Order Received</h3>
+        <pre>${JSON.stringify(req.body, null, 2)}</pre>
+      `,
     });
 
-    console.log("✅ Order email sent from verified domain");
-    res.json({ success: true });
+    console.log("✅ Order email sent from verified domain:", response);
+    res.json({ success: true, data: response });
   } catch (err) {
     console.error("❌ Order email error:", err?.response || err);
     res.status(500).json({

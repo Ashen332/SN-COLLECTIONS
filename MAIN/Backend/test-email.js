@@ -1,29 +1,19 @@
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 import dotenv from "dotenv";
-
 dotenv.config();
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.OWNER_EMAIL,
-    pass: process.env.GMAIL_APP_PASSWORD,
-  },
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-async function testMail() {
+(async () => {
   try {
-    const info = await transporter.sendMail({
-      from: `"SN Collections Test" <${process.env.OWNER_EMAIL}>`,
-      to: process.env.OWNER_EMAIL,
-      subject: "✅ Gmail SMTP Test Successful",
-      text: "If you received this email, Gmail SMTP is working perfectly.",
+    const response = await resend.emails.send({
+      from: "SN Collections <contact@sncollections.lk>",
+      to: "sncollection230@gmail.com",
+      subject: "Test Email ✅",
+      html: "<h1>This is a test email</h1>",
     });
-
-    console.log("✅ Email sent:", info.response);
+    console.log("Test send response:", response);
   } catch (err) {
-    console.error("❌ Email failed:", err.message);
+    console.error("Test send error:", err?.response || err);
   }
-}
-
-testMail();
+})();
