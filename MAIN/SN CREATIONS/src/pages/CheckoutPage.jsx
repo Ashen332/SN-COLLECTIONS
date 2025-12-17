@@ -208,8 +208,8 @@ const CheckoutPage = () => {
                     <div className="cdm-box p-4 bg-light border rounded-4 mt-3">
                       <h6 className="fw-bold mb-3 text-uppercase text-dark">Bank Details</h6>
                       <ul className="list-unstyled small mb-3">
-                        <li><strong>Bank:</strong> S @ N Collections Pvt Ltd</li>
-                        <li><strong>Branch:</strong> 035020682299-S/A</li>
+                        <li><strong>Bank:</strong> HNB</li>
+                        <li><strong>Branch:</strong> Wattala</li>
                         <li><strong>Account Name:</strong> S.N. Collection</li>
                         <li><strong>Account No:</strong> 035010048841-C/A</li>
                       </ul>
